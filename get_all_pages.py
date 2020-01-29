@@ -5,11 +5,13 @@ from colorama import Fore, Style
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import random
+import time
 
 # url = sys.argv[1]
-# new_url = "https://en.wikipedia.org/wiki/Special:AllPages"
-new_url = "https://en.wikipedia.org/w/index.php?title=Special:AllPages&from=%22B%22+Is+for+Burglar"
+new_url = "https://en.wikipedia.org/wiki/Special:AllPages"
+# new_url = "https://en.wikipedia.org/w/index.php?title=Special:AllPages&from=%22B%22+Is+for+Burglar"
 
+f = open("all_articles.txt", "w")
 
 def scrap_page(url, count):
     # Download URL
@@ -23,7 +25,7 @@ def scrap_page(url, count):
 
     next_page_link = next_page_soup.find_all("a")
 
-    if len(next_page_link) == 1:
+    if len(next_page_link) == 1 and count != 1:
         return ""
 
     next_page_link = next_page_link[-1].get("href")
@@ -41,6 +43,7 @@ def scrap_page(url, count):
     # valid_links = []
     colors = list(vars(colorama.Fore).values())
 
+    # print(len(less_soup.find_all('a')))
 
     for tag in less_soup.find_all('a'):
         link = tag.get('href')
@@ -55,13 +58,14 @@ def scrap_page(url, count):
     return next_page_link
 
     # print(valid_links)
-f = open("all_articles.txt", "w")
 
+# scrap_page("https://en.wikipedia.org/wiki/Special:AllPages", 1)
 
 count = 1
 url = "blank"
 while url != new_url:
     url = new_url
+    # print(url)
     new_url = "https://en.wikipedia.org/" + scrap_page(url, count)
     count += 1
 
