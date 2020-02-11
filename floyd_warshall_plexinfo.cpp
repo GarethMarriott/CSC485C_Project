@@ -10,7 +10,7 @@
 #include <vector>
 
 using namespace std;
- 
+
 class graph
 {
    int n,i,j,k;
@@ -20,7 +20,7 @@ class graph
         void floydwarshall();
         void print();
 };
- 
+
 void graph::get_data()
 {
   /*string line;
@@ -30,7 +30,7 @@ void graph::get_data()
         adjacency[i][j] = (int)line;
   }
 
-  
+
   printf("\nEnter the total number of vertices: ");
   scanf("%d",&n);
   printf("\nEnter the adjacency matrix (If there is no \nedge betweent two vertex then enter 1000): \n\n");
@@ -44,7 +44,7 @@ void graph::get_data()
 
     string curr_row;
 
-    ifstream f("test_matrix.txt");
+    ifstream f("1000matrix.txt");
 
     std::getline(f, curr_row);
     n = stoi(curr_row);
@@ -61,10 +61,10 @@ void graph::get_data()
     }
 
 }
- 
+
 void graph::floydwarshall()
 {
-  
+
    /*for(i=1;i<=n;i++)
    {
         for(j=1;j<=n;j++)
@@ -72,10 +72,10 @@ void graph::floydwarshall()
              distance[i][j]=adjacency[i][j];
         }
    }*/
- 
+
    /* Updating distance matrix by taking intermediate vertex 'k'
       between every other vertices pair */
- 
+
    for(k=0;k<n;k++)
    {
         for(i=0;i<n;i++)
@@ -92,7 +92,7 @@ void graph::floydwarshall()
 }
 void graph::print()
 {
-  
+
   printf("\n\nThe final distance matrix is: \n\n");
   for(i=0;i<n;i++)
   {
@@ -103,7 +103,7 @@ void graph::print()
       printf("\n");
   }
 }
- 
+
 int main()
 {
   graph graph;
