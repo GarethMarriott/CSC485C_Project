@@ -1,5 +1,5 @@
 /*
- * Code gathered from: http://www.plexinfo.com/2017/06/implementation-of-floyd-warshall-algorithm-c.html
+ * Code initially gathered from: http://www.plexinfo.com/2017/06/implementation-of-floyd-warshall-algorithm-c.html
  */
 
 
@@ -8,13 +8,15 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
 class graph
 {
    int n,i,j,k;
-   vector< vector<int> > adjacency, distance;
+   vector< vector<float> > distance; //, adjacency;
+   vector< vector<int> > path;
    public:
         void get_data();
         void floydwarshall();
@@ -44,19 +46,33 @@ void graph::get_data()
 
     string curr_row;
 
-    ifstream f("1000matrix.txt");
+    ifstream f("test_matrix.txt");
 
     std::getline(f, curr_row);
     n = stoi(curr_row);
 
-    adjacency.resize(n);
+    //adjacency.resize(n);
     distance.resize(n);
+    path.resize(n);
 
     for(i=0; getline(f, curr_row); i++){
         std::stringstream ss(curr_row);
         while(getline(ss, curr_row, ' ')){
-            adjacency.at(i).push_back(stoi(curr_row));
-            distance.at(i).push_back(stoi(curr_row));
+            if(stoi(curr_row) < 0){
+                distance.at(i).push_back(std::numeric_limits<float>::infinity());
+            }
+            else
+            {
+                distance.at(i).push_back(stof(curr_row));
+            }
+            path.at(i).push_back(-1);
+        }
+    }
+
+    for(i=0; i<n; i++){
+        for(j=0; j<n; j++){
+            if(distance.at(i).at(j)<std::numeric_limits<float>::infinity())
+                path.at(i).at(j) = j;
         }
     }
 
@@ -82,9 +98,10 @@ void graph::floydwarshall()
         {
             for(j=0;j<n;j++)
             {
-                if(distance.at(i).at(k)+distance.at(k).at(j)<distance.at(i).at(j))
+                if(distance.at(i).at(k)+distance.at(k).at(j)<distance.at(i).at(j) && distance.at(i).at(k)>-1 && distance.at(k).at(j)>-1)
                 {
-                      distance.at(i).at(j)=distance.at(i).at(k)+distance.at(k).at(j);
+                    distance.at(i).at(j) = distance.at(i).at(k)+distance.at(k).at(j);
+                    path.at(i).at(j) = k;
                 }
             }
         }
@@ -98,7 +115,17 @@ void graph::print()
   {
       for(j=0;j<n;j++)
       {
-          printf("%d\t\t",distance.at(i).at(j));
+          printf("%f\t",distance.at(i).at(j));
+      }
+      printf("\n");
+  }
+
+  printf("\n\nThe final path matrix is: \n\n");
+  for(i=0;i<n;i++)
+  {
+      for(j=0;j<n;j++)
+      {
+          printf("%d\t",path.at(i).at(j));
       }
       printf("\n");
   }
