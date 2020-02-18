@@ -71,20 +71,20 @@ void graph::get_data()
         std::stringstream ss(curr_row);
         while(getline(ss, curr_row, ' ')){
             if(stoi(curr_row) < 0){
-                adjacency.at(i).push_back(-1);
+                adjacency[i].push_back(-1);
             }
             else
             {
-                adjacency.at(i).push_back(stoi(curr_row));
+                adjacency[i].push_back(stoi(curr_row));
             }
-            path.at(i).push_back(-1);
-            distance.at(i).push_back(-1);
+            path[i].push_back(-1);
+            distance[i].push_back(-1);
         }
     }
 
     for(int i=0; i<n; i++){
-        path.at(i).at(i) = i;
-        distance.at(i).at(i) = 0;
+        path[i][i] = i;
+        distance[i][i] = 0;
     }
 
 }
@@ -92,7 +92,7 @@ void graph::get_data()
 
 void graph::print_path(int start, int finish)
 {
-    int dist = distance.at(start).at(finish);
+    int dist = distance[start][finish];
     int curr_path [dist+1];
     curr_path[dist] = finish;
     int curr = finish;
@@ -118,7 +118,7 @@ void graph::bfs()
     {
         for(int j=0; j<n; j++)
         {
-            if(adjacency.at(i).at(j) > 0)
+            if(adjacency[i][j] > 0)
             {
                 q.push(node(j, i, 1));
             }
@@ -130,12 +130,12 @@ void graph::bfs()
             curr = q.front();
             q.pop();
 
-            path.at(i).at(curr.value) = curr.parent;
-            distance.at(i).at(curr.value) = curr.depth;
+            path[i][curr.value] = curr.parent;
+            distance[i][curr.value] = curr.depth;
 
             for(int j=0; j<n; j++)
             {
-                if(path.at(i).at(j) < 0 && adjacency.at(curr.value).at(j) > 0)
+                if(path[i][j] < 0 && adjacency[curr.value][j] > 0)
                 {
                     q.push(node(j, curr.value, curr.depth + 1));
                 }
@@ -154,7 +154,7 @@ void graph::print()
   {
       for(int j=0;j<n;j++)
       {
-          printf("%d\t",distance.at(i).at(j));
+          printf("%d\t",distance[i][j]);
       }
       printf("\n");
   }
@@ -164,7 +164,7 @@ void graph::print()
   {
       for(int j=0;j<n;j++)
       {
-          printf("%d\t",path.at(i).at(j));
+          printf("%d\t",path[i][j]);
       }
       printf("\n");
   }
