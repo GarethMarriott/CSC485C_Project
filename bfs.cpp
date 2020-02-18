@@ -13,22 +13,25 @@ using namespace std;
 class graph
 {
    int n;
-   vector< vector<int> > adjacency; //, distance; 
+   vector< vector<int> > adjacency, distance; 
    vector< vector<int> > path;
    public:
         void get_data();
         void bfs();
         void print();
+        void print_path(int start, int goal);
 };
 
 struct node
 {
     int value;
     int parent;
-    node(int val, int par)
+    int depth;
+    node(int v, int p, int d)
     {
-        value = val;
-        parent = par;
+        value = v;
+        parent = p;
+        depth = d;
     }
 };
 
@@ -61,7 +64,7 @@ void graph::get_data()
     n = stoi(curr_row);
 
     adjacency.resize(n);
-    //distance.resize(n);
+    distance.resize(n);
     path.resize(n);
 
     for(int i=0; getline(f, curr_row); i++){
@@ -75,28 +78,49 @@ void graph::get_data()
                 adjacency.at(i).push_back(stoi(curr_row));
             }
             path.at(i).push_back(-1);
+            distance.at(i).push_back(-1);
         }
     }
 
     for(int i=0; i<n; i++){
         path.at(i).at(i) = i;
+        distance.at(i).at(i) = 0;
     }
 
 }
 
 
+void graph::print_path(int start, int finish)
+{
+    int dist = distance.at(start).at(finish);
+    int curr_path [dist+1];
+    curr_path[dist] = finish;
+    int curr = finish;
+    for(int i = dist-1; i>=0; i--)
+    {
+        curr = path.at(start).at(curr);
+        curr_path[i] = curr;
+    }
+
+    printf("\n\nShortest path from %d to %d is:\n", start, finish);
+    for(int i=0; i<dist; i++){
+        printf("%d, ", curr_path[i]);
+    }
+    printf("%d\n", curr_path[dist]);
+}
+
 
 void graph::bfs()
 {
     std::queue<node> q;
-    struct node curr = node(0, 0);
+    struct node curr = node(0, 0, 0);
     for(int i=0; i<n; i++)
     {
         for(int j=0; j<n; j++)
         {
             if(adjacency.at(i).at(j) > 0)
             {
-                q.push(node(j, i));
+                q.push(node(j, i, 1));
             }
         }
 
@@ -107,12 +131,13 @@ void graph::bfs()
             q.pop();
 
             path.at(i).at(curr.value) = curr.parent;
+            distance.at(i).at(curr.value) = curr.depth;
 
             for(int j=0; j<n; j++)
             {
                 if(path.at(i).at(j) < 0 && adjacency.at(curr.value).at(j) > 0)
                 {
-                    q.push(node(j, curr.value));
+                    q.push(node(j, curr.value, curr.depth + 1));
                 }
             }
         }
@@ -124,15 +149,15 @@ void graph::bfs()
 void graph::print()
 {
 
-  /*printf("\n\nThe adjacency matrix is: \n\n");
+  printf("\n\nThe distance matrix is: \n\n");
   for(int i=0;i<n;i++)
   {
       for(int j=0;j<n;j++)
       {
-          printf("%d\t",adjacency.at(i).at(j));
+          printf("%d\t",distance.at(i).at(j));
       }
       printf("\n");
-  }*/
+  }
 
   printf("\n\nThe final path matrix is: \n\n");
   for(int i=0;i<n;i++)
@@ -151,5 +176,6 @@ int main()
   graph.get_data();
   graph.bfs();
   graph.print();
+  graph.print_path(2, 1);
   return 0;
 }
