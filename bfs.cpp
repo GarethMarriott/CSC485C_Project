@@ -150,7 +150,7 @@ void graph::bfs()
             for(int j=0; j<adjacency_list[i+k].size(); j++)
             {
                 
-                    q.push(node(adjacency_list[i+k][j], i+k, 1));
+                    q[k].push(node(adjacency_list[i+k][j], i+k, 1));
                     discovered[i][adjacency_list[i+k][j]] = true;
                 
             }
@@ -158,18 +158,18 @@ void graph::bfs()
 
             while(!q.empty())
             {
-                curr = q.front();
-                q.pop();
+                curr[k] = q[k].front();
+                q[k].pop();
 
-                path[i+k][curr.value] = curr.parent;
-                distance[i+k][curr.value] = curr.depth;
+                path[i+k][curr[k].value] = curr[k].parent;
+                distance[i+k][curr[k].value] = curr[k].depth;
 
-                for(int j=0; j<adjacency_list[curr.value].size(); j++)
+                for(int j=0; j<adjacency_list[curr[k].value].size(); j++)
                 {
-                    if(!discovered[i+k][adjacency_list[curr.value][j]])
+                    if(!discovered[i+k][adjacency_list[curr[k].value][j]])
                     {
-                        q.push(node(adjacency_list[curr.value][j], curr.value, curr.depth + 1));
-                        discovered[i+k][adjacency_list[curr.value][j]] = true;
+                        q[k].push(node(adjacency_list[curr[k].value][j], curr[k].value, curr[k].depth + 1));
+                        discovered[i+k][adjacency_list[curr[k].value][j]] = true;
                     }
                 }
             }
