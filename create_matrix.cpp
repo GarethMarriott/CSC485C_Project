@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <sstream>      // std::stringstream, std::stringbuf
+#include <vector>
 
 //USAGE: ./createMatrix <width/height of matrix> <sparceness factor>
 
@@ -24,7 +25,13 @@ int main(int argc, char const *argv[]) {
 	s >> count;
 	std::cout << count << std::endl;
 
-	int matrix[count][count];
+
+
+	std::vector<std::vector<int>> matrix;
+	matrix.resize(count);
+	for (size_t i = 0; i < count; i++) {
+		matrix[i].resize(count);
+	}
 
 	srand (time(NULL));
 

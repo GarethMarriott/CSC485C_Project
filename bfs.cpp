@@ -13,7 +13,7 @@ using namespace std;
 class graph
 {
    int n;
-   vector< vector<int> > distance; 
+   vector< vector<int> > distance;
    vector< vector<int> > path;
    vector< vector<int> > adjacency_list;
    vector< vector<bool> > discovered;
@@ -72,6 +72,9 @@ void graph::get_data()
     discovered.resize(n);
 
     for(int i=0; getline(f, curr_row); i++){
+        // if (i%10 == 0) {
+        //   printf("%d\n", i);
+        // }
         std::stringstream ss(curr_row);
         int j=0;
         while(getline(ss, curr_row, ' ')){
@@ -106,7 +109,7 @@ void graph::print_path(int start, int finish)
     vector< int > curr_path;
 
     int curr = finish;
-    
+
     while(curr != start)
     {
         curr_path.push_back(curr);
@@ -129,6 +132,9 @@ void graph::bfs()
     struct node curr = node(0, 0, 0);
     for(int i=0; i<n; i++)
     {
+        // if (i%10 == 0) {
+        //   printf("%d\n", i);
+        // }
         for(int j=0; j<adjacency_list[i].size(); j++)
         {
             q.push(node(adjacency_list[i][j], i, 1));
@@ -169,7 +175,7 @@ void graph::print()
           printf("%d\t",adjacency_list[i][j]);
       }
       printf("\n");
-  }  
+  }
 
   printf("\n\nThe distance matrix is: \n\n");
   for(int i=0;i<n;i++)
@@ -197,7 +203,7 @@ int main()
   graph graph;
   graph.get_data();
   graph.bfs();
-  graph.print();
-  graph.print_path(2, 1);
+  // graph.print();
+  // graph.print_path(2, 1);
   return 0;
 }

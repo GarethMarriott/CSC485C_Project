@@ -13,7 +13,7 @@ using namespace std;
 class graph
 {
    int n;
-   vector< vector<int> > adjacency, distance; 
+   vector< vector<int> > adjacency, distance;
    vector< vector<int> > path;
    public:
         void get_data();
