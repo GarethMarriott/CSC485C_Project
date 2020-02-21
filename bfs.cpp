@@ -37,7 +37,7 @@ struct node
     }
 };
 
-void graph::get_data()
+void graph::get_data(string filename)
 {
   /*string line;
   ifstream file ("test_matrix.txt");
@@ -60,7 +60,7 @@ void graph::get_data()
 
     string curr_row;
 
-    ifstream f("test_matrix.txt");
+    ifstream f(filename);
 
     std::getline(f, curr_row);
     n = stoi(curr_row);
@@ -213,10 +213,11 @@ void graph::print()
   }
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
+  std::string filename(argv[1]);
   graph graph;
-  graph.get_data();
+  graph.get_data(filename);
   graph.bfs();
   // graph.print();
   // graph.print_path(2, 1);
