@@ -6,34 +6,59 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 # url = "https://en.wikipedia.org/wiki/Sergei_Korolev"
+def scrap_page(url):
+    # url = sys.argv[1]
+    print(Fore.BLUE + "fetching URL: " + url + Style.RESET_ALL)
 
-url = sys.argv[1]
-print(Fore.BLUE + "fetching URL: " + url)
-print(Style.RESET_ALL)
+    # Download URL
+    try:
+        html = urlopen(url).read().decode('utf-8')
+    except:
+        print("404 error")
+    else:
+        # Set up HTML Parser with fetched data
+        soup = BeautifulSoup(html, 'html.parser')
 
-# Download URL
-html = urlopen(url).read().decode('utf-8')
+        # Filter out everything except "content div"
+        less_soup = soup.find(id='content')
 
-# Set up HTML Parser with fetched data
-soup = BeautifulSoup(html, 'html.parser')
+        # compile Regex
+        # Selects only links that start with /wiki/ and don't have a hash in the name
+        prog = re.compile('^\/wiki\/[^\s|^#]+$')
+        # matches wikipedia special pages. NOTE: this REGEX get inversed during for loop
+        prog_WIKI = re.compile('^\/wiki\/(Wikipedia|WP|Project|User|Image|Special|Category|File|Template|Help|Category|Portal|Draft|TimedText|MediaWiki|Module|Book|Education_Program_talk|Gadget|Gadget_definition|Education_Program|WT|CAT|H|MOS|P|T|Project_Talk|Image_Talk|Template_talk|Talk):.*$')
 
-# Filter out everything except "content div"
-less_soup = soup.find(id='content')
+        # Loop through all valid links and select append all valid links to list
+        valid_links = []
+        for tag in less_soup.find_all('a'):
+            link = tag.get('href')
+            if link == None:
+                continue
+            if prog.match(link) and not prog_WIKI.match(link):
+                link = link[6:]
+                valid_links.append(link)
 
-# compile Regex
-# Selects only links that start with /wiki/ and don't have a hash in the name
-prog = re.compile('^\/wiki\/[^\s|^#]+$')
-# matches wikipedia special pages. NOTE: this REGEX get inversed during for loop
-prog_WIKI = re.compile('^\/wiki\/(Wikipedia|WP|Project|User|Image|Special|Category|File|Template|Help|Category|Portal|Draft|TimedText|MediaWiki|Module|Book|Education_Program_talk|Gadget|Gadget_definition|Education_Program|WT|CAT|H|MOS|P|T|Project_Talk|Image_Talk|Template_talk|Talk):.*$')
+        return valid_links
 
-# Loop through all valid links and select append all valid links to list
-valid_links = []
-for tag in less_soup.find_all('a'):
-    link = tag.get('href')
-    if link == None:
+
+
+in_file = open("all_articles_out.txt","r")
+out_file = open("all_articles.txt","w")
+
+num_lines = sys.argv[1]
+counter = 1
+
+for line in in_file:
+    print(str(counter) + "/" + num_lines)
+
+    line = line.strip('\n')
+    links = scrap_page("https://en.wikipedia.org/wiki/" + line)
+    if links == None:
         continue
-    if prog.match(link) and not prog_WIKI.match(link):
-        print(link)
-        valid_links.append(link)
-
-print(valid_links)
+    links_set = set(links)
+    links = list(links_set)
+    links = [line] + links
+    links = " ".join(links)
+    # print(line)
+    out_file.write(links+"\n")
+    counter = counter + 1
