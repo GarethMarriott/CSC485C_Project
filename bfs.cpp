@@ -147,17 +147,17 @@ void graph::bfs()
 
         for(int k=0; k<num; k++)
         {
+
             for(int j=0; j<adjacency_list[i+k].size(); j++)
             {
 
                     q[k].push(node(adjacency_list[i+k][j], i+k, 1));
-                    discovered[i][adjacency_list[i+k][j]] = true;
+                    discovered[i+k][adjacency_list[i+k][j]] = true;
 
             }
 
-
-            while(!q.empty())
-            {
+            while(!q[k].empty())
+            { 
                 curr[k] = q[k].front();
                 q[k].pop();
 
