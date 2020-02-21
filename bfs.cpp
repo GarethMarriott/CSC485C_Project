@@ -18,7 +18,7 @@ class graph
    vector< vector<int> > adjacency_list;
    vector< vector<bool> > discovered;
    public:
-        void get_data();
+        void get_data(string filename);
         void bfs();
         void print();
         void print_path(int start, int goal);
@@ -132,10 +132,10 @@ void graph::bfs()
 
     vector< queue<node> > q;
     vector< node > curr;
-    
+
     for(int i=0; i<num; i++)
     {
-        q.push_back(queue<node>);
+        q.push_back(queue<node>());
         curr.push_back(node(0, 0, 0));
     }
 
@@ -143,16 +143,16 @@ void graph::bfs()
     {
         // if (i%10 == 0) {
         //   printf("%d\n", i);
-        // }  
+        // }
 
         for(int k=0; k<num; k++)
         {
             for(int j=0; j<adjacency_list[i+k].size(); j++)
             {
-                
+
                     q[k].push(node(adjacency_list[i+k][j], i+k, 1));
                     discovered[i][adjacency_list[i+k][j]] = true;
-                
+
             }
 
 
