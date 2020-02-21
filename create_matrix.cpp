@@ -11,7 +11,7 @@
 
 int main(int argc, char const *argv[]) {
 	if (argc != 3){
-		std::cout << "INVALID ARGS - USAGE: ./createMatrix <width/height of matrix> <sparceness factor>" << std::endl;
+		std::cout << "INVALID ARGS - USAGE: ./create_matrix <width/height of matrix> <sparceness factor>" << std::endl;
 		return 0;
 	}
 	std::stringstream s;
