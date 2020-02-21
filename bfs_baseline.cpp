@@ -18,7 +18,7 @@ class graph
    vector< vector<int> > adjacency_list;
    vector< vector<bool> > discovered;
    public:
-        void get_data();
+        void get_data(string filename);
         void bfs();
         void print();
         void print_path(int start, int goal);
@@ -37,7 +37,7 @@ struct node
     }
 };
 
-void graph::get_data()
+void graph::get_data(string filename)
 {
   /*string line;
   ifstream file ("test_matrix.txt");
@@ -198,10 +198,11 @@ void graph::print()
   }
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
+  std::string filename(argv[1]);
   graph graph;
-  graph.get_data();
+  graph.get_data(filename);
   graph.bfs();
   // graph.print();
   // graph.print_path(2, 1);
