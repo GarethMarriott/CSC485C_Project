@@ -60,7 +60,7 @@ void graph::get_data(string filename)
 
     string curr_row;
 
-    ifstream f("test_matrix.txt");
+    ifstream f(filename);
 
     std::getline(f, curr_row);
     n = stoi(curr_row);
@@ -132,9 +132,9 @@ void graph::bfs()
     struct node curr = node(0, 0, 0);
     for(int i=0; i<n; i++)
     {
-        // if (i%10 == 0) {
-        //   printf("%d\n", i);
-        // }
+        if (i%10 == 0) {
+          cout << "\r" << i << std::flush;
+        }
         for(int j=0; j<adjacency_list[i].size(); j++)
         {
             q.push(node(adjacency_list[i][j], i, 1));

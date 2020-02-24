@@ -10,8 +10,8 @@
 // sparceness factor: percent chance a edge will be between any two nodes (1/sparceness)
 
 int main(int argc, char const *argv[]) {
-	if (argc != 3){
-		std::cout << "INVALID ARGS - USAGE: ./create_matrix <width/height of matrix> <sparceness factor>" << std::endl;
+	if (argc != 4){
+		std::cout << "INVALID ARGS - USAGE: ./create_matrix <width/height of matrix> <sparceness factor> <1 or 2 ( 1=baseline 2=current )>" << std::endl;
 		return 0;
 	}
 	std::stringstream s;
@@ -25,7 +25,11 @@ int main(int argc, char const *argv[]) {
 	s >> count;
 	std::cout << count << std::endl;
 
-
+	s.clear();
+	s << argv[3];
+	size_t mode;
+	s >> mode;
+	// std::cout << mode << std::endl;
 
 	std::vector<std::vector<int>> matrix;
 	matrix.resize(count);
@@ -43,7 +47,11 @@ int main(int argc, char const *argv[]) {
 				if (rand() % max_rand + 1 <= 1) {
 					matrix[i][j] = 1;
 				}else{
-					matrix[i][j] = -1;
+					if (mode == 1) {
+						matrix[i][j] = -1;
+					}else{
+						matrix[i][j] = 2;
+					}
 				}
 			}
 		}
