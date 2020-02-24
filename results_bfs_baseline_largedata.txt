@@ -1,0 +1,176 @@
+ Performance counter stats for './bfs_baseline 5000-100matrix.txt':
+
+         50,856.88 msec task-clock                #    0.823 CPUs utilized          
+               900      context-switches          #    0.018 K/sec                  
+                29      cpu-migrations            #    0.001 K/sec                  
+            60,742      page-faults               #    0.001 M/sec                  
+   172,072,306,237      cycles                    #    3.383 GHz                      (37.55%)
+    73,725,506,353      stalled-cycles-frontend   #   42.85% frontend cycles idle     (50.06%)
+   333,981,476,009      instructions              #    1.94  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (62.57%)
+    42,010,419,030      branches                  #  826.052 M/sec                    (62.51%)
+        60,793,497      branch-misses             #    0.14% of all branches          (62.49%)
+   117,691,165,785      L1-dcache-loads           # 2314.164 M/sec                    (49.90%)
+       287,188,519      L1-dcache-load-misses     #    0.24% of all L1-dcache hits    (25.00%)
+       185,142,565      LLC-loads                 #    3.640 M/sec                    (25.03%)
+   <not supported>      LLC-load-misses                                             
+
+      61.793914870 seconds time elapsed
+
+      50.715433000 seconds user
+       0.156035000 seconds sys
+
+
+5000-100 done
+5990
+ Performance counter stats for './bfs_baseline 6000-100matrix.txt':
+
+         89,805.35 msec task-clock                #    0.821 CPUs utilized          
+             2,235      context-switches          #    0.025 K/sec                  
+                47      cpu-migrations            #    0.001 K/sec                  
+            84,632      page-faults               #    0.942 K/sec                  
+   305,099,059,058      cycles                    #    3.397 GHz                      (37.48%)
+   140,207,849,246      stalled-cycles-frontend   #   45.95% frontend cycles idle     (49.99%)
+   562,495,651,776      instructions              #    1.84  insn per cycle         
+                                                  #    0.25  stalled cycles per insn  (62.52%)
+    70,235,872,614      branches                  #  782.090 M/sec                    (62.52%)
+        87,169,539      branch-misses             #    0.12% of all branches          (62.53%)
+   197,704,910,784      L1-dcache-loads           # 2201.482 M/sec                    (49.99%)
+       456,585,649      L1-dcache-load-misses     #    0.23% of all L1-dcache hits    (24.98%)
+       305,962,217      LLC-loads                 #    3.407 M/sec                    (24.98%)
+   <not supported>      LLC-load-misses                                             
+
+     109.392745710 seconds time elapsed
+
+      89.491950000 seconds user
+       0.335954000 seconds sys
+
+
+6000-100 done
+6990
+ Performance counter stats for './bfs_baseline 7000-100matrix.txt':
+
+        129,115.02 msec task-clock                #    0.996 CPUs utilized          
+             1,718      context-switches          #    0.013 K/sec                  
+                38      cpu-migrations            #    0.000 K/sec                  
+           112,651      page-faults               #    0.872 K/sec                  
+   452,605,113,604      cycles                    #    3.505 GHz                      (37.50%)
+   196,663,111,046      stalled-cycles-frontend   #   43.45% frontend cycles idle     (50.01%)
+   876,990,358,326      instructions              #    1.94  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (62.51%)
+   108,804,340,496      branches                  #  842.693 M/sec                    (62.50%)
+       137,283,646      branch-misses             #    0.13% of all branches          (62.49%)
+   308,972,649,534      L1-dcache-loads           # 2393.003 M/sec                    (49.98%)
+       654,501,538      L1-dcache-load-misses     #    0.21% of all L1-dcache hits    (25.01%)
+       453,956,744      LLC-loads                 #    3.516 M/sec                    (25.00%)
+   <not supported>      LLC-load-misses                                             
+
+     129.583843098 seconds time elapsed
+
+     128.829321000 seconds user
+       0.291876000 seconds sys
+
+
+7000-100 done
+7990
+ Performance counter stats for './bfs_baseline 8000-100matrix.txt':
+
+        188,910.67 msec task-clock                #    0.996 CPUs utilized          
+             5,443      context-switches          #    0.029 K/sec                  
+                40      cpu-migrations            #    0.000 K/sec                  
+           131,506      page-faults               #    0.696 K/sec                  
+   666,211,650,319      cycles                    #    3.527 GHz                      (37.50%)
+   291,539,479,808      stalled-cycles-frontend   #   43.76% frontend cycles idle     (50.00%)
+ 1,288,394,834,142      instructions              #    1.93  insn per cycle         
+                                                  #    0.23  stalled cycles per insn  (62.49%)
+   159,011,479,863      branches                  #  841.728 M/sec                    (62.50%)
+       144,981,525      branch-misses             #    0.09% of all branches          (62.50%)
+   453,355,219,704      L1-dcache-loads           # 2399.839 M/sec                    (50.00%)
+       904,581,215      L1-dcache-load-misses     #    0.20% of all L1-dcache hits    (25.00%)
+       645,477,058      LLC-loads                 #    3.417 M/sec                    (25.00%)
+   <not supported>      LLC-load-misses                                             
+
+     189.662115567 seconds time elapsed
+
+     188.595151000 seconds user
+       0.327963000 seconds sys
+
+
+8000-100 done
+8990
+ Performance counter stats for './bfs_baseline 9000-100matrix.txt':
+
+        338,370.45 msec task-clock                #    0.886 CPUs utilized          
+            18,207      context-switches          #    0.054 K/sec                  
+               208      cpu-migrations            #    0.001 K/sec                  
+           182,347      page-faults               #    0.539 K/sec                  
+ 1,151,768,299,163      cycles                    #    3.404 GHz                      (37.48%)
+   605,682,763,731      stalled-cycles-frontend   #   52.59% frontend cycles idle     (49.99%)
+ 1,818,587,164,354      instructions              #    1.58  insn per cycle         
+                                                  #    0.33  stalled cycles per insn  (62.49%)
+   223,510,885,470      branches                  #  660.551 M/sec                    (62.49%)
+       470,107,393      branch-misses             #    0.21% of all branches          (62.51%)
+   640,018,827,476      L1-dcache-loads           # 1891.474 M/sec                    (50.01%)
+     1,477,150,196      L1-dcache-load-misses     #    0.23% of all L1-dcache hits    (25.01%)
+     1,014,378,254      LLC-loads                 #    2.998 M/sec                    (24.99%)
+   <not supported>      LLC-load-misses                                             
+
+     381.741580054 seconds time elapsed
+
+     337.347466000 seconds user
+       1.066960000 seconds sys
+
+
+9000-100 done
+9990
+ Performance counter stats for './bfs_baseline 10000-100matrix.txt':
+
+        452,593.30 msec task-clock                #    0.993 CPUs utilized          
+            23,212      context-switches          #    0.051 K/sec                  
+               187      cpu-migrations            #    0.000 K/sec                  
+           222,156      page-faults               #    0.491 K/sec                  
+ 1,545,110,407,737      cycles                    #    3.414 GHz                      (37.50%)
+   805,887,797,838      stalled-cycles-frontend   #   52.16% frontend cycles idle     (50.01%)
+ 2,473,927,989,815      instructions              #    1.60  insn per cycle         
+                                                  #    0.33  stalled cycles per insn  (62.50%)
+   303,319,053,865      branches                  #  670.180 M/sec                    (62.49%)
+       403,941,714      branch-misses             #    0.13% of all branches          (62.49%)
+   871,192,264,262      L1-dcache-loads           # 1924.890 M/sec                    (49.99%)
+     1,925,010,295      L1-dcache-load-misses     #    0.22% of all L1-dcache hits    (25.01%)
+     1,329,886,322      LLC-loads                 #    2.938 M/sec                    (25.00%)
+   <not supported>      LLC-load-misses                                             
+
+     455.668943041 seconds time elapsed
+
+     451.356626000 seconds user
+       1.299126000 seconds sys
+
+
+10000-100 done
+
+
+ Performance counter stats for './bfs_baseline 20000-100matrix.txt':
+
+      2,947,327.66 msec task-clock                #    0.564 CPUs utilized          
+           100,327      context-switches          #    0.034 K/sec                  
+               640      cpu-migrations            #    0.000 K/sec                  
+           831,016      page-faults               #    0.282 K/sec                  
+10,277,043,328,897      cycles                    #    3.487 GHz                      (37.50%)
+ 4,779,585,655,671      stalled-cycles-frontend   #   46.51% frontend cycles idle     (50.00%)
+18,957,389,711,229      instructions              #    1.84  insn per cycle         
+                                                  #    0.25  stalled cycles per insn  (62.50%)
+ 2,291,422,880,622      branches                  #  777.458 M/sec                    (62.50%)
+     1,549,333,286      branch-misses             #    0.07% of all branches          (62.50%)
+ 6,681,045,985,376      L1-dcache-loads           # 2266.815 M/sec                    (50.00%)
+    10,414,560,393      L1-dcache-load-misses     #    0.16% of all L1-dcache hits    (25.00%)
+     6,868,563,609      LLC-loads                 #    2.330 M/sec                    (25.00%)
+   <not supported>      LLC-load-misses                                             
+
+    5222.398303363 seconds time elapsed
+
+    2942.757190000 seconds user
+       4.806244000 seconds sys
+
+
+20000-100 done
+
