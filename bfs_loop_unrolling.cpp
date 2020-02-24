@@ -135,7 +135,7 @@ void graph::bfs()
         // if (i%10 == 0) {
         //   printf("%d\n", i);
         // }
-        for(int j=0; j<adjacency_list[i].size(); j++)
+        for(uint j=0; j<adjacency_list[i].size(); j++)
         {
             q.push(node(adjacency_list[i][j], i, 1));
             discovered[i][adjacency_list[i][j]] = true;
@@ -148,10 +148,10 @@ void graph::bfs()
             q.pop();
 
             path[i][curr.value] = curr.parent;
-            distance[i][curr.value] = curr.depth;
+            distance[i][curr.value] = curr.depth;           
 
-            int j=0;
-            for(; j<adjacency_list[curr.value].size()-3; j+=4)
+            uint j=0;
+            for(; j+3<adjacency_list[curr.value].size(); j+=4)
             {
                 if(!discovered[i][adjacency_list[curr.value][j]])
                 {
@@ -194,7 +194,7 @@ void graph::print()
   printf("\n\nThe adjacency list is: \n\n");
   for(int i=0;i<n;i++)
   {
-      for(int j=0;j<adjacency_list[i].size();j++)
+      for(uint j=0;j<adjacency_list[i].size();j++)
       {
           printf("%d\t",adjacency_list[i][j]);
       }
