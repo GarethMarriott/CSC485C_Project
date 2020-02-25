@@ -528,3 +528,538 @@ bfs_loop_unrolling
 
 4000-2 done
 
+
+
+
+---------------------------------------
+
+
+
+ Performance counter stats for './bfs_loop_unrolling 1000-100matrix.txt':
+
+            631.81 msec task-clock                #    0.999 CPUs utilized          
+                 1      context-switches          #    0.002 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             2,209      page-faults               #    0.003 M/sec                  
+     2,214,609,859      cycles                    #    3.505 GHz                      (27.96%)
+       860,870,434      stalled-cycles-frontend   #   38.87% frontend cycles idle     (28.59%)
+     4,048,268,208      instructions              #    1.83  insn per cycle         
+                                                  #    0.21  stalled cycles per insn  (36.19%)
+       565,419,476      branches                  #  894.925 M/sec                    (36.82%)
+         3,267,199      branch-misses             #    0.58% of all branches          (37.32%)
+     1,437,875,538      L1-dcache-loads           # 2275.816 M/sec                    (28.36%)
+         4,678,204      L1-dcache-load-misses     #    0.33% of all L1-dcache hits    (13.93%)
+           871,844      LLC-loads                 #    1.380 M/sec                    (13.93%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         1,139,978      L1-icache-load-misses                                         (20.89%)
+     1,446,982,943      dTLB-loads                # 2290.231 M/sec                    (20.26%)
+            89,475      dTLB-load-misses          #    0.01% of all dTLB cache hits   (13.93%)
+            34,377      iTLB-loads                #    0.054 M/sec                    (13.93%)
+            46,199      iTLB-load-misses          #  134.39% of all iTLB cache hits   (20.89%)
+   <not supported>      L1-dcache-prefetches                                        
+           604,232      L1-dcache-prefetch-misses #    0.956 M/sec                    (27.86%)
+
+       0.632245180 seconds time elapsed
+
+       0.624353000 seconds user
+       0.007953000 seconds sys
+
+
+1000-100 done
+
+ Performance counter stats for './bfs_loop_unrolling 1000-10matrix.txt':
+
+          3,109.93 msec task-clock                #    0.998 CPUs utilized          
+                82      context-switches          #    0.026 K/sec                  
+                 3      cpu-migrations            #    0.001 K/sec                  
+             2,322      page-faults               #    0.747 K/sec                  
+    10,917,147,535      cycles                    #    3.510 GHz                      (28.41%)
+     4,454,547,562      stalled-cycles-frontend   #   40.80% frontend cycles idle     (28.52%)
+    21,771,680,266      instructions              #    1.99  insn per cycle         
+                                                  #    0.20  stalled cycles per insn  (35.70%)
+     2,602,665,857      branches                  #  836.888 M/sec                    (35.67%)
+         3,371,508      branch-misses             #    0.13% of all branches          (35.80%)
+     7,586,535,739      L1-dcache-loads           # 2439.454 M/sec                    (28.48%)
+        13,737,855      L1-dcache-load-misses     #    0.18% of all L1-dcache hits    (14.39%)
+         9,350,228      LLC-loads                 #    3.007 M/sec                    (14.38%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         2,744,872      L1-icache-load-misses                                         (21.54%)
+     7,597,709,031      dTLB-loads                # 2443.047 M/sec                    (21.30%)
+           573,402      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.14%)
+           114,915      iTLB-loads                #    0.037 M/sec                    (14.14%)
+            54,464      iTLB-load-misses          #   47.40% of all iTLB cache hits   (21.32%)
+   <not supported>      L1-dcache-prefetches                                        
+         5,972,406      L1-dcache-prefetch-misses #    1.920 M/sec                    (28.39%)
+
+       3.116385537 seconds time elapsed
+
+       3.102610000 seconds user
+       0.007986000 seconds sys
+
+
+1000-10 done
+
+ Performance counter stats for './bfs_loop_unrolling 1000-4matrix.txt':
+
+          7,295.25 msec task-clock                #    0.999 CPUs utilized          
+                61      context-switches          #    0.008 K/sec                  
+                 2      cpu-migrations            #    0.000 K/sec                  
+             2,658      page-faults               #    0.364 K/sec                  
+    25,580,865,329      cycles                    #    3.507 GHz                      (28.54%)
+    10,740,257,176      stalled-cycles-frontend   #   41.99% frontend cycles idle     (28.60%)
+    50,831,427,154      instructions              #    1.99  insn per cycle         
+                                                  #    0.21  stalled cycles per insn  (35.78%)
+     5,973,417,188      branches                  #  818.809 M/sec                    (35.82%)
+         3,569,570      branch-misses             #    0.06% of all branches          (35.88%)
+    17,959,378,402      L1-dcache-loads           # 2461.791 M/sec                    (28.57%)
+        24,923,162      L1-dcache-load-misses     #    0.14% of all L1-dcache hits    (14.27%)
+        12,085,859      LLC-loads                 #    1.657 M/sec                    (14.25%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         4,428,943      L1-icache-load-misses                                         (21.34%)
+    17,834,090,414      dTLB-loads                # 2444.617 M/sec                    (21.30%)
+         1,629,163      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.25%)
+           275,334      iTLB-loads                #    0.038 M/sec                    (14.25%)
+            96,189      iTLB-load-misses          #   34.94% of all iTLB cache hits   (21.37%)
+   <not supported>      L1-dcache-prefetches                                        
+        13,198,262      L1-dcache-prefetch-misses #    1.809 M/sec                    (28.50%)
+
+       7.301889942 seconds time elapsed
+
+       7.291688000 seconds user
+       0.003997000 seconds sys
+
+
+1000-4 done
+
+ Performance counter stats for './bfs_loop_unrolling 1000-2matrix.txt':
+
+         14,291.57 msec task-clock                #    0.999 CPUs utilized          
+               756      context-switches          #    0.053 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             2,792      page-faults               #    0.195 K/sec                  
+    49,812,831,349      cycles                    #    3.485 GHz                      (28.57%)
+    20,925,510,753      stalled-cycles-frontend   #   42.01% frontend cycles idle     (28.57%)
+    99,435,315,696      instructions              #    2.00  insn per cycle         
+                                                  #    0.21  stalled cycles per insn  (35.72%)
+    11,581,158,772      branches                  #  810.349 M/sec                    (35.78%)
+         4,209,213      branch-misses             #    0.04% of all branches          (35.81%)
+    35,152,780,700      L1-dcache-loads           # 2459.687 M/sec                    (28.58%)
+        41,083,228      L1-dcache-load-misses     #    0.12% of all L1-dcache hits    (14.27%)
+        12,218,099      LLC-loads                 #    0.855 M/sec                    (14.25%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         8,287,532      L1-icache-load-misses                                         (21.38%)
+    35,063,684,743      dTLB-loads                # 2453.453 M/sec                    (21.35%)
+         2,165,946      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.26%)
+           480,865      iTLB-loads                #    0.034 M/sec                    (14.28%)
+           167,503      iTLB-load-misses          #   34.83% of all iTLB cache hits   (21.41%)
+   <not supported>      L1-dcache-prefetches                                        
+        25,401,253      L1-dcache-prefetch-misses #    1.777 M/sec                    (28.54%)
+
+      14.310500863 seconds time elapsed
+
+      14.274277000 seconds user
+       0.020003000 seconds sys
+
+
+1000-2 done
+
+ Performance counter stats for './bfs_loop_unrolling 2000-100matrix.txt':
+
+          3,665.39 msec task-clock                #    0.999 CPUs utilized          
+                28      context-switches          #    0.008 K/sec                  
+                 2      cpu-migrations            #    0.001 K/sec                  
+             8,393      page-faults               #    0.002 M/sec                  
+    12,847,784,570      cycles                    #    3.505 GHz                      (28.36%)
+     5,211,915,722      stalled-cycles-frontend   #   40.57% frontend cycles idle     (28.47%)
+    24,171,418,035      instructions              #    1.88  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (35.67%)
+     3,185,253,952      branches                  #  869.007 M/sec                    (35.81%)
+        12,767,395      branch-misses             #    0.40% of all branches          (35.92%)
+     8,547,221,431      L1-dcache-loads           # 2331.869 M/sec                    (28.59%)
+        31,353,878      L1-dcache-load-misses     #    0.37% of all L1-dcache hits    (14.40%)
+        17,194,826      LLC-loads                 #    4.691 M/sec                    (14.40%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         4,630,039      L1-icache-load-misses                                         (21.47%)
+     8,472,903,297      dTLB-loads                # 2311.594 M/sec                    (21.25%)
+         1,245,667      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.17%)
+           184,857      iTLB-loads                #    0.050 M/sec                    (14.17%)
+           118,836      iTLB-load-misses          #   64.29% of all iTLB cache hits   (21.23%)
+   <not supported>      L1-dcache-prefetches                                        
+         8,130,989      L1-dcache-prefetch-misses #    2.218 M/sec                    (28.32%)
+
+       3.668976654 seconds time elapsed
+
+       3.649861000 seconds user
+       0.015973000 seconds sys
+
+
+2000-100 done
+
+ Performance counter stats for './bfs_loop_unrolling 2000-10matrix.txt':
+
+         23,710.30 msec task-clock                #    1.000 CPUs utilized          
+                56      context-switches          #    0.002 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             8,864      page-faults               #    0.374 K/sec                  
+    83,241,188,807      cycles                    #    3.511 GHz                      (28.55%)
+    35,426,439,637      stalled-cycles-frontend   #   42.56% frontend cycles idle     (28.56%)
+   163,734,672,050      instructions              #    1.97  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (35.72%)
+    19,327,532,042      branches                  #  815.154 M/sec                    (35.73%)
+        13,281,617      branch-misses             #    0.07% of all branches          (35.75%)
+    57,895,673,275      L1-dcache-loads           # 2441.795 M/sec                    (28.58%)
+        86,360,866      L1-dcache-load-misses     #    0.15% of all L1-dcache hits    (14.30%)
+        53,337,210      LLC-loads                 #    2.250 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        11,644,413      L1-icache-load-misses                                         (21.42%)
+    57,954,338,906      dTLB-loads                # 2444.269 M/sec                    (21.39%)
+         5,604,950      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.27%)
+           968,033      iTLB-loads                #    0.041 M/sec                    (14.27%)
+           299,646      iTLB-load-misses          #   30.95% of all iTLB cache hits   (21.41%)
+   <not supported>      L1-dcache-prefetches                                        
+        43,316,603      L1-dcache-prefetch-misses #    1.827 M/sec                    (28.54%)
+
+      23.712914623 seconds time elapsed
+
+      23.690906000 seconds user
+       0.019995000 seconds sys
+
+
+2000-10 done
+
+ Performance counter stats for './bfs_loop_unrolling 2000-4matrix.txt':
+
+         57,756.91 msec task-clock                #    0.999 CPUs utilized          
+               907      context-switches          #    0.016 K/sec                  
+                10      cpu-migrations            #    0.000 K/sec                  
+            10,198      page-faults               #    0.177 K/sec                  
+   201,224,309,496      cycles                    #    3.484 GHz                      (28.57%)
+    85,649,738,751      stalled-cycles-frontend   #   42.56% frontend cycles idle     (28.57%)
+   398,152,093,215      instructions              #    1.98  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (35.71%)
+    46,417,352,267      branches                  #  803.668 M/sec                    (35.71%)
+        15,585,726      branch-misses             #    0.03% of all branches          (35.71%)
+   140,458,112,702      L1-dcache-loads           # 2431.884 M/sec                    (28.56%)
+       167,270,724      L1-dcache-load-misses     #    0.12% of all L1-dcache hits    (14.29%)
+        53,951,737      LLC-loads                 #    0.934 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        31,268,821      L1-icache-load-misses                                         (21.43%)
+   140,307,986,109      dTLB-loads                # 2429.285 M/sec                    (21.42%)
+        10,413,007      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.28%)
+         2,066,482      iTLB-loads                #    0.036 M/sec                    (14.29%)
+           645,303      iTLB-load-misses          #   31.23% of all iTLB cache hits   (21.44%)
+   <not supported>      L1-dcache-prefetches                                        
+       103,002,435      L1-dcache-prefetch-misses #    1.783 M/sec                    (28.58%)
+
+      57.791435739 seconds time elapsed
+
+      57.720090000 seconds user
+       0.039980000 seconds sys
+
+
+2000-4 done
+
+ Performance counter stats for './bfs_loop_unrolling 2000-2matrix.txt':
+
+        114,451.23 msec task-clock                #    0.999 CPUs utilized          
+             1,986      context-switches          #    0.017 K/sec                  
+                19      cpu-migrations            #    0.000 K/sec                  
+            10,588      page-faults               #    0.093 K/sec                  
+   398,002,972,875      cycles                    #    3.477 GHz                      (28.57%)
+   170,108,877,486      stalled-cycles-frontend   #   42.74% frontend cycles idle     (28.58%)
+   786,037,881,902      instructions              #    1.97  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (35.72%)
+    91,298,626,487      branches                  #  797.708 M/sec                    (35.73%)
+        17,230,918      branch-misses             #    0.02% of all branches          (35.72%)
+   277,846,266,994      L1-dcache-loads           # 2427.639 M/sec                    (28.58%)
+       299,959,986      L1-dcache-load-misses     #    0.11% of all L1-dcache hits    (14.30%)
+        81,317,486      LLC-loads                 #    0.710 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        61,585,398      L1-icache-load-misses                                         (21.42%)
+   277,841,107,509      dTLB-loads                # 2427.594 M/sec                    (21.41%)
+        14,309,353      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.28%)
+         4,307,295      iTLB-loads                #    0.038 M/sec                    (14.28%)
+         1,246,174      iTLB-load-misses          #   28.93% of all iTLB cache hits   (21.42%)
+   <not supported>      L1-dcache-prefetches                                        
+       200,620,018      L1-dcache-prefetch-misses #    1.753 M/sec                    (28.57%)
+
+     114.591809604 seconds time elapsed
+
+     114.421983000 seconds user
+       0.035990000 seconds sys
+
+
+2000-2 done
+
+ Performance counter stats for './bfs_loop_unrolling 3000-100matrix.txt':
+
+         10,379.44 msec task-clock                #    0.991 CPUs utilized          
+             1,697      context-switches          #    0.163 K/sec                  
+                 3      cpu-migrations            #    0.000 K/sec                  
+            24,303      page-faults               #    0.002 M/sec                  
+    36,653,000,385      cycles                    #    3.531 GHz                      (28.67%)
+    14,629,734,707      stalled-cycles-frontend   #   39.91% frontend cycles idle     (28.77%)
+    71,354,529,594      instructions              #    1.95  insn per cycle         
+                                                  #    0.21  stalled cycles per insn  (35.95%)
+     9,124,297,764      branches                  #  879.074 M/sec                    (35.87%)
+        29,729,608      branch-misses             #    0.33% of all branches          (35.91%)
+    25,105,485,215      L1-dcache-loads           # 2418.770 M/sec                    (28.51%)
+        85,773,789      L1-dcache-load-misses     #    0.34% of all L1-dcache hits    (14.28%)
+        51,813,003      LLC-loads                 #    4.992 M/sec                    (14.24%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         8,851,134      L1-icache-load-misses                                         (21.35%)
+    25,174,156,565      dTLB-loads                # 2425.386 M/sec                    (21.27%)
+         5,718,393      dTLB-load-misses          #    0.02% of all dTLB cache hits   (14.22%)
+           286,472      iTLB-loads                #    0.028 M/sec                    (14.19%)
+           299,432      iTLB-load-misses          #  104.52% of all iTLB cache hits   (21.40%)
+   <not supported>      L1-dcache-prefetches                                        
+        23,804,198      L1-dcache-prefetch-misses #    2.293 M/sec                    (28.51%)
+
+      10.473463212 seconds time elapsed
+
+      10.327179000 seconds user
+       0.059856000 seconds sys
+
+
+3000-100 done
+
+ Performance counter stats for './bfs_loop_unrolling 3000-10matrix.txt':
+
+         81,706.37 msec task-clock                #    1.000 CPUs utilized          
+               403      context-switches          #    0.005 K/sec                  
+                10      cpu-migrations            #    0.000 K/sec                  
+            25,798      page-faults               #    0.316 K/sec                  
+   284,696,956,398      cycles                    #    3.484 GHz                      (28.56%)
+   125,527,174,592      stalled-cycles-frontend   #   44.09% frontend cycles idle     (28.57%)
+   545,562,984,401      instructions              #    1.92  insn per cycle         
+                                                  #    0.23  stalled cycles per insn  (35.72%)
+    63,915,963,210      branches                  #  782.264 M/sec                    (35.72%)
+        30,542,694      branch-misses             #    0.05% of all branches          (35.73%)
+   192,598,158,247      L1-dcache-loads           # 2357.199 M/sec                    (28.57%)
+       263,300,968      L1-dcache-load-misses     #    0.14% of all L1-dcache hits    (14.29%)
+       131,219,926      LLC-loads                 #    1.606 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        47,503,593      L1-icache-load-misses                                         (21.42%)
+   192,223,257,017      dTLB-loads                # 2352.611 M/sec                    (21.42%)
+        18,386,187      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.28%)
+         3,010,311      iTLB-loads                #    0.037 M/sec                    (14.28%)
+         1,026,791      iTLB-load-misses          #   34.11% of all iTLB cache hits   (21.42%)
+   <not supported>      L1-dcache-prefetches                                        
+       144,435,432      L1-dcache-prefetch-misses #    1.768 M/sec                    (28.56%)
+
+      81.729664055 seconds time elapsed
+
+      81.667415000 seconds user
+       0.039991000 seconds sys
+
+
+3000-10 done
+
+ Performance counter stats for './bfs_loop_unrolling 3000-4matrix.txt':
+
+        194,158.99 msec task-clock                #    0.999 CPUs utilized          
+             2,044      context-switches          #    0.011 K/sec                  
+                25      cpu-migrations            #    0.000 K/sec                  
+            29,138      page-faults               #    0.150 K/sec                  
+   675,491,544,764      cycles                    #    3.479 GHz                      (28.57%)
+   288,560,379,825      stalled-cycles-frontend   #   42.72% frontend cycles idle     (28.57%)
+ 1,332,246,780,418      instructions              #    1.97  insn per cycle         
+                                                  #    0.22  stalled cycles per insn  (35.72%)
+   154,929,269,656      branches                  #  797.951 M/sec                    (35.72%)
+        42,421,540      branch-misses             #    0.03% of all branches          (35.72%)
+   471,125,212,081      L1-dcache-loads           # 2426.492 M/sec                    (28.57%)
+       534,839,045      L1-dcache-load-misses     #    0.11% of all L1-dcache hits    (14.28%)
+       155,740,614      LLC-loads                 #    0.802 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       107,675,596      L1-icache-load-misses                                         (21.43%)
+   471,301,316,796      dTLB-loads                # 2427.399 M/sec                    (21.42%)
+        31,008,600      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.29%)
+         7,878,094      iTLB-loads                #    0.041 M/sec                    (14.28%)
+         1,949,489      iTLB-load-misses          #   24.75% of all iTLB cache hits   (21.43%)
+   <not supported>      L1-dcache-prefetches                                        
+       342,751,763      L1-dcache-prefetch-misses #    1.765 M/sec                    (28.57%)
+
+     194.292449166 seconds time elapsed
+
+     194.053877000 seconds user
+       0.111966000 seconds sys
+
+
+3000-4 done
+
+ Performance counter stats for './bfs_loop_unrolling 3000-2matrix.txt':
+
+        421,930.82 msec task-clock                #    0.997 CPUs utilized          
+            16,565      context-switches          #    0.039 K/sec                  
+                77      cpu-migrations            #    0.000 K/sec                  
+            30,304      page-faults               #    0.072 K/sec                  
+ 1,450,419,843,984      cycles                    #    3.438 GHz                      (28.57%)
+   675,507,360,543      stalled-cycles-frontend   #   46.57% frontend cycles idle     (28.57%)
+ 2,646,723,505,900      instructions              #    1.82  insn per cycle         
+                                                  #    0.26  stalled cycles per insn  (35.72%)
+   306,768,913,473      branches                  #  727.060 M/sec                    (35.72%)
+        45,339,664      branch-misses             #    0.01% of all branches          (35.72%)
+   934,245,883,333      L1-dcache-loads           # 2214.216 M/sec                    (28.57%)
+     1,030,216,865      L1-dcache-load-misses     #    0.11% of all L1-dcache hits    (14.29%)
+       358,671,127      LLC-loads                 #    0.850 M/sec                    (14.29%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       246,217,035      L1-icache-load-misses                                         (21.43%)
+   934,726,457,551      dTLB-loads                # 2215.355 M/sec                    (21.43%)
+        50,714,673      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.28%)
+        12,044,239      iTLB-loads                #    0.029 M/sec                    (14.28%)
+         3,927,993      iTLB-load-misses          #   32.61% of all iTLB cache hits   (21.42%)
+   <not supported>      L1-dcache-prefetches                                        
+       700,156,559      L1-dcache-prefetch-misses #    1.659 M/sec                    (28.56%)
+
+     423.240494958 seconds time elapsed
+
+     421.551987000 seconds user
+       0.415980000 seconds sys
+
+
+3000-2 done
+
+ Performance counter stats for './bfs_loop_unrolling 4000-100matrix.txt':
+
+         30,612.41 msec task-clock                #    0.989 CPUs utilized          
+             1,266      context-switches          #    0.041 K/sec                  
+                 9      cpu-migrations            #    0.000 K/sec                  
+            33,046      page-faults               #    0.001 M/sec                  
+   104,671,584,197      cycles                    #    3.419 GHz                      (28.56%)
+    55,665,401,668      stalled-cycles-frontend   #   53.18% frontend cycles idle     (28.56%)
+   157,871,320,086      instructions              #    1.51  insn per cycle         
+                                                  #    0.35  stalled cycles per insn  (35.69%)
+    19,855,132,924      branches                  #  648.597 M/sec                    (35.68%)
+        60,371,360      branch-misses             #    0.30% of all branches          (35.69%)
+    55,695,940,085      L1-dcache-loads           # 1819.391 M/sec                    (28.54%)
+       189,118,453      L1-dcache-load-misses     #    0.34% of all L1-dcache hits    (14.35%)
+       123,127,733      LLC-loads                 #    4.022 M/sec                    (14.34%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        34,193,700      L1-icache-load-misses                                         (21.47%)
+    55,672,649,598      dTLB-loads                # 1818.630 M/sec                    (21.40%)
+        19,095,713      dTLB-load-misses          #    0.03% of all dTLB cache hits   (14.26%)
+         1,057,086      iTLB-loads                #    0.035 M/sec                    (14.28%)
+           778,155      iTLB-load-misses          #   73.61% of all iTLB cache hits   (21.41%)
+   <not supported>      L1-dcache-prefetches                                        
+        61,611,258      L1-dcache-prefetch-misses #    2.013 M/sec                    (28.54%)
+
+      30.940594962 seconds time elapsed
+
+      30.480596000 seconds user
+       0.135913000 seconds sys
+
+
+4000-100 done
+
+ Performance counter stats for './bfs_loop_unrolling 4000-10matrix.txt':
+
+        216,229.32 msec task-clock                #    0.998 CPUs utilized          
+             3,590      context-switches          #    0.017 K/sec                  
+                37      cpu-migrations            #    0.000 K/sec                  
+            34,913      page-faults               #    0.161 K/sec                  
+   739,089,767,294      cycles                    #    3.418 GHz                      (28.56%)
+   360,873,339,031      stalled-cycles-frontend   #   48.83% frontend cycles idle     (28.57%)
+ 1,280,917,725,417      instructions              #    1.73  insn per cycle         
+                                                  #    0.28  stalled cycles per insn  (35.71%)
+   149,558,475,286      branches                  #  691.666 M/sec                    (35.71%)
+        75,597,276      branch-misses             #    0.05% of all branches          (35.71%)
+   451,703,034,427      L1-dcache-loads           # 2089.000 M/sec                    (28.57%)
+       628,196,661      L1-dcache-load-misses     #    0.14% of all L1-dcache hits    (14.28%)
+       301,801,508      LLC-loads                 #    1.396 M/sec                    (14.28%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       162,154,542      L1-icache-load-misses                                         (21.43%)
+   451,873,908,249      dTLB-loads                # 2089.790 M/sec                    (21.43%)
+        42,812,551      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.29%)
+         6,166,175      iTLB-loads                #    0.029 M/sec                    (14.28%)
+         5,409,258      iTLB-load-misses          #   87.72% of all iTLB cache hits   (21.43%)
+   <not supported>      L1-dcache-prefetches                                        
+       360,275,698      L1-dcache-prefetch-misses #    1.666 M/sec                    (28.57%)
+
+     216.645850376 seconds time elapsed
+
+     216.040017000 seconds user
+       0.199863000 seconds sys
+
+
+4000-10 done
+
+ Performance counter stats for './bfs_loop_unrolling 4000-4matrix.txt':
+
+        502,915.63 msec task-clock                #    0.998 CPUs utilized          
+            10,116      context-switches          #    0.020 K/sec                  
+               126      cpu-migrations            #    0.000 K/sec                  
+            40,276      page-faults               #    0.080 K/sec                  
+ 1,724,053,313,419      cycles                    #    3.428 GHz                      (28.57%)
+   802,603,497,499      stalled-cycles-frontend   #   46.55% frontend cycles idle     (28.56%)
+ 3,148,425,774,313      instructions              #    1.83  insn per cycle         
+                                                  #    0.25  stalled cycles per insn  (35.71%)
+   365,357,174,060      branches                  #  726.478 M/sec                    (35.71%)
+        85,576,213      branch-misses             #    0.02% of all branches          (35.71%)
+ 1,111,386,565,119      L1-dcache-loads           # 2209.887 M/sec                    (28.57%)
+     1,274,596,132      L1-dcache-load-misses     #    0.11% of all L1-dcache hits    (14.29%)
+       453,091,941      LLC-loads                 #    0.901 M/sec                    (14.29%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       301,129,913      L1-icache-load-misses                                         (21.43%)
+ 1,111,578,090,281      dTLB-loads                # 2210.268 M/sec                    (21.43%)
+        73,085,283      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.29%)
+        14,339,745      iTLB-loads                #    0.029 M/sec                    (14.29%)
+         5,647,154      iTLB-load-misses          #   39.38% of all iTLB cache hits   (21.43%)
+   <not supported>      L1-dcache-prefetches                                        
+       837,477,594      L1-dcache-prefetch-misses #    1.665 M/sec                    (28.57%)
+
+     503.869084434 seconds time elapsed
+
+     502.586115000 seconds user
+       0.355876000 seconds sys
+
+
+4000-4 done
+
+ Performance counter stats for './bfs_loop_unrolling 4000-2matrix.txt':
+
+        974,306.63 msec task-clock                #    0.996 CPUs utilized          
+            46,380      context-switches          #    0.048 K/sec                  
+               310      cpu-migrations            #    0.000 K/sec                  
+            41,175      page-faults               #    0.042 K/sec                  
+ 3,346,216,467,381      cycles                    #    3.434 GHz                      (28.57%)
+ 1,516,859,207,140      stalled-cycles-frontend   #   45.33% frontend cycles idle     (28.57%)
+ 6,262,693,238,897      instructions              #    1.87  insn per cycle         
+                                                  #    0.24  stalled cycles per insn  (35.71%)
+   725,396,465,301      branches                  #  744.526 M/sec                    (35.71%)
+       104,989,491      branch-misses             #    0.01% of all branches          (35.71%)
+ 2,212,440,681,632      L1-dcache-loads           # 2270.785 M/sec                    (28.58%)
+     2,377,464,970      L1-dcache-load-misses     #    0.11% of all L1-dcache hits    (14.29%)
+       761,260,819      LLC-loads                 #    0.781 M/sec                    (14.29%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       611,286,013      L1-icache-load-misses                                         (21.43%)
+ 2,213,002,284,229      dTLB-loads                # 2271.361 M/sec                    (21.42%)
+       114,075,902      dTLB-load-misses          #    0.01% of all dTLB cache hits   (14.29%)
+        29,733,466      iTLB-loads                #    0.031 M/sec                    (14.29%)
+         9,608,025      iTLB-load-misses          #   32.31% of all iTLB cache hits   (21.43%)
+   <not supported>      L1-dcache-prefetches                                        
+     1,630,962,397      L1-dcache-prefetch-misses #    1.674 M/sec                    (28.58%)
+
+     977.953659233 seconds time elapsed
+
+     973.470016000 seconds user
+       0.959418000 seconds sys
+
+
+4000-2 done
+
