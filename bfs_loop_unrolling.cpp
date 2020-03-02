@@ -7,8 +7,11 @@
 #include <sstream>
 #include <vector>
 #include <queue>
+#include <omp.h>
 
 using namespace std;
+
+#include "test_header.hpp"
 
 class graph
 {
@@ -18,7 +21,7 @@ class graph
    vector< vector<int> > adjacency_list;
    vector< vector<bool> > discovered;
    public:
-        void get_data(string filename);
+        void get_data();
         void bfs();
         void print();
         void print_path(int start, int goal);
@@ -37,7 +40,7 @@ struct node
     }
 };
 
-void graph::get_data(string filename)
+void graph::get_data()
 {
   /*string line;
   ifstream file ("test_matrix.txt");
@@ -58,42 +61,47 @@ void graph::get_data(string filename)
        }
   }*/
 
-    string curr_row;
+    adjacency_list = adj_pre;
 
-    ifstream f(filename);
+    // std::cout << typeid(adjacency_list).name() << '\n';
 
-    std::getline(f, curr_row);
-    n = stoi(curr_row);
+    n = adjacency_list.size();
+
+    // for (int i = 0; i < n; i++) {
+    //   for (int j = 0; j < adjacency_list[i].size(); j++) {
+		//       std::cout << adjacency_list[i][j] << " ";
+	  //   }
+    //   std::cout << " " << '\n';
+	  // }
 
     //adjacency.resize(n);
-    adjacency_list.resize(n);
     distance.resize(n);
     path.resize(n);
     discovered.resize(n);
 
-    for(int i=0; getline(f, curr_row); i++){
-        // if (i%10 == 0) {
-        //   printf("%d\n", i);
-        // }
-        std::stringstream ss(curr_row);
-        int j=0;
-        while(getline(ss, curr_row, ' ')){
-            if(stoi(curr_row) > 0){
-                adjacency_list[i].push_back(j);
-            }
-            //adjacency[i].push_back(stoi(curr_row));
-            path[i].push_back(-1);
-            distance[i].push_back(-1);
-            discovered[i].push_back(false);
-            j++;
-        }
+
+    for(int i=0; i<n; i++){
+      // if (i%10 == 0) {
+      //   cout << "\r" << i << std::flush;
+      // }
+
+      distance[i].resize(n);
+      path[i].resize(n);
+      discovered[i].resize(n);
+      for (size_t j = 0; j < n; j++) {
+        path[i][j] = -1;
+        distance[i][j] = -1;
+        discovered[i][j] = false;
+      }
     }
 
     for(int i=0; i<n; i++){
+
         path[i][i] = i;
         distance[i][i] = 0;
         discovered[i][i] = true;
     }
+
 }
 
 
@@ -128,10 +136,13 @@ void graph::print_path(int start, int finish)
 
 void graph::bfs()
 {
-    std::queue<node> q;
-    struct node curr = node(0, 0, 0);
+
+
+    // #pragma omp parallel for num_threads(  4)
     for(int i=0; i<n; i++)
     {
+        std::queue<node> q;
+        struct node curr = node(0, 0, 0);
         // if (i%10 == 0) {
         //   printf("%d\n", i);
         // }
@@ -148,7 +159,7 @@ void graph::bfs()
             q.pop();
 
             path[i][curr.value] = curr.parent;
-            distance[i][curr.value] = curr.depth;           
+            distance[i][curr.value] = curr.depth;
 
             uint j=0;
             for(; j+3<adjacency_list[curr.value].size(); j+=4)
@@ -224,9 +235,9 @@ void graph::print()
 
 int main(int argc, char const *argv[])
 {
-  std::string filename(argv[1]);
+  // std::string filename(argv[1]);
   graph graph;
-  graph.get_data(filename);
+  graph.get_data();
   graph.bfs();
   // graph.print();
   // graph.print_path(2, 1);
