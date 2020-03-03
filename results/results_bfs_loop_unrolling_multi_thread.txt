@@ -1,0 +1,366 @@
+ Performance counter stats for './bfs_loop_unrolling':
+
+          4,641.56 msec task-clock                #    3.751 CPUs utilized          
+               893      context-switches          #    0.192 K/sec                  
+                 2      cpu-migrations            #    0.000 K/sec                  
+             2,398      page-faults               #    0.517 K/sec                  
+    15,668,610,677      cycles                    #    3.376 GHz                      (24.47%)
+     9,582,719,749      stalled-cycles-frontend   #   61.16% frontend cycles idle     (25.97%)
+    20,404,388,424      instructions              #    1.30  insn per cycle         
+                                                  #    0.47  stalled cycles per insn  (33.14%)
+     2,378,404,004      branches                  #  512.414 M/sec                    (34.75%)
+         2,896,718      branch-misses             #    0.12% of all branches          (32.10%)
+     7,276,428,588      L1-dcache-loads           # 1567.667 M/sec                    (20.68%)
+        12,394,374      L1-dcache-load-misses     #    0.17% of all L1-dcache hits    (18.57%)
+         5,823,764      LLC-loads                 #    1.255 M/sec                    (17.13%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         1,262,468      L1-icache-load-misses                                         (21.03%)
+     7,402,429,402      dTLB-loads                # 1594.813 M/sec                    (16.63%)
+           220,553      dTLB-load-misses          #    0.00% of all dTLB cache hits   (16.79%)
+            11,622      iTLB-loads                #    0.003 M/sec                    (14.37%)
+            28,386      iTLB-load-misses          #  244.24% of all iTLB cache hits   (18.52%)
+   <not supported>      L1-dcache-prefetches                                        
+         4,303,173      L1-dcache-prefetch-misses #    0.927 M/sec                    (24.76%)
+
+       1.237527252 seconds time elapsed
+
+       4.621670000 seconds user
+       0.023987000 seconds sys
+
+
+1000 10
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+            764.78 msec task-clock                #    3.180 CPUs utilized          
+               242      context-switches          #    0.316 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             2,219      page-faults               #    0.003 M/sec                  
+     2,556,189,217      cycles                    #    3.342 GHz                      (31.35%)
+     1,521,540,324      stalled-cycles-frontend   #   59.52% frontend cycles idle     (32.29%)
+     2,970,997,960      instructions              #    1.16  insn per cycle         
+                                                  #    0.51  stalled cycles per insn  (39.27%)
+       371,126,894      branches                  #  485.270 M/sec                    (38.15%)
+         2,546,767      branch-misses             #    0.69% of all branches          (37.04%)
+     1,137,503,345      L1-dcache-loads           # 1487.351 M/sec                    (16.05%)
+         4,336,474      L1-dcache-load-misses     #    0.38% of all L1-dcache hits    (14.95%)
+           282,179      LLC-loads                 #    0.369 M/sec                    (15.88%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+           558,817      L1-icache-load-misses                                         (18.48%)
+     1,156,000,963      dTLB-loads                # 1511.538 M/sec                    (14.06%)
+           188,451      dTLB-load-misses          #    0.02% of all dTLB cache hits   (15.53%)
+             3,337      iTLB-loads                #    0.004 M/sec                    (13.42%)
+            17,659      iTLB-load-misses          #  529.19% of all iTLB cache hits   (19.43%)
+   <not supported>      L1-dcache-prefetches                                        
+           270,672      L1-dcache-prefetch-misses #    0.354 M/sec                    (27.12%)
+
+       0.240490861 seconds time elapsed
+
+       0.758635000 seconds user
+       0.007861000 seconds sys
+
+
+1000 100
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+         36,732.32 msec task-clock                #    3.811 CPUs utilized          
+             6,631      context-switches          #    0.181 K/sec                  
+                 4      cpu-migrations            #    0.000 K/sec                  
+             9,039      page-faults               #    0.246 K/sec                  
+   124,170,045,627      cycles                    #    3.380 GHz                      (24.98%)
+    77,377,773,209      stalled-cycles-frontend   #   62.32% frontend cycles idle     (26.17%)
+   160,603,528,140      instructions              #    1.29  insn per cycle         
+                                                  #    0.48  stalled cycles per insn  (33.27%)
+    18,661,408,504      branches                  #  508.038 M/sec                    (33.26%)
+        12,131,793      branch-misses             #    0.07% of all branches          (32.78%)
+    57,040,673,279      L1-dcache-loads           # 1552.874 M/sec                    (19.50%)
+        80,281,458      L1-dcache-load-misses     #    0.14% of all L1-dcache hits    (17.99%)
+        45,607,531      LLC-loads                 #    1.242 M/sec                    (17.24%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         9,563,445      L1-icache-load-misses                                         (19.80%)
+    56,885,921,935      dTLB-loads                # 1548.661 M/sec                    (17.57%)
+         5,073,666      dTLB-load-misses          #    0.01% of all dTLB cache hits   (17.30%)
+            59,223      iTLB-loads                #    0.002 M/sec                    (15.36%)
+           182,720      iTLB-load-misses          #  308.53% of all iTLB cache hits   (19.97%)
+   <not supported>      L1-dcache-prefetches                                        
+        32,102,952      L1-dcache-prefetch-misses #    0.874 M/sec                    (25.68%)
+
+       9.638815542 seconds time elapsed
+
+      36.695474000 seconds user
+       0.063769000 seconds sys
+
+
+2000 10
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+          4,807.17 msec task-clock                #    3.489 CPUs utilized          
+               880      context-switches          #    0.183 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             8,307      page-faults               #    0.002 M/sec                  
+    16,238,465,454      cycles                    #    3.378 GHz                      (24.01%)
+     9,844,616,633      stalled-cycles-frontend   #   60.63% frontend cycles idle     (25.16%)
+    20,203,470,441      instructions              #    1.24  insn per cycle         
+                                                  #    0.49  stalled cycles per insn  (32.38%)
+     2,415,600,337      branches                  #  502.499 M/sec                    (33.00%)
+        11,150,774      branch-misses             #    0.46% of all branches          (31.84%)
+     7,296,145,000      L1-dcache-loads           # 1517.762 M/sec                    (20.33%)
+        26,395,505      L1-dcache-load-misses     #    0.36% of all L1-dcache hits    (16.53%)
+         7,723,726      LLC-loads                 #    1.607 M/sec                    (16.50%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         1,652,828      L1-icache-load-misses                                         (19.73%)
+     7,278,031,276      dTLB-loads                # 1513.994 M/sec                    (17.11%)
+           675,803      dTLB-load-misses          #    0.01% of all dTLB cache hits   (16.91%)
+             9,480      iTLB-loads                #    0.002 M/sec                    (15.03%)
+            39,765      iTLB-load-misses          #  419.46% of all iTLB cache hits   (20.31%)
+   <not supported>      L1-dcache-prefetches                                        
+         5,061,850      L1-dcache-prefetch-misses #    1.053 M/sec                    (25.81%)
+
+       1.377621443 seconds time elapsed
+
+       4.791615000 seconds user
+       0.019882000 seconds sys
+
+
+2000 100
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+        119,018.96 msec task-clock                #    3.782 CPUs utilized          
+            20,204      context-switches          #    0.170 K/sec                  
+                18      cpu-migrations            #    0.000 K/sec                  
+            20,033      page-faults               #    0.168 K/sec                  
+   402,391,834,299      cycles                    #    3.381 GHz                      (24.72%)
+   246,358,193,161      stalled-cycles-frontend   #   61.22% frontend cycles idle     (26.07%)
+   536,429,030,915      instructions              #    1.33  insn per cycle         
+                                                  #    0.46  stalled cycles per insn  (33.19%)
+    62,220,383,152      branches                  #  522.777 M/sec                    (33.15%)
+        27,444,460      branch-misses             #    0.04% of all branches          (32.35%)
+   190,513,067,787      L1-dcache-loads           # 1600.695 M/sec                    (19.98%)
+       246,235,359      L1-dcache-load-misses     #    0.13% of all L1-dcache hits    (17.77%)
+       101,857,292      LLC-loads                 #    0.856 M/sec                    (17.07%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        28,004,116      L1-icache-load-misses                                         (20.46%)
+   190,202,407,428      dTLB-loads                # 1598.085 M/sec                    (17.47%)
+        14,568,519      dTLB-load-misses          #    0.01% of all dTLB cache hits   (17.53%)
+           503,736      iTLB-loads                #    0.004 M/sec                    (15.05%)
+           499,537      iTLB-load-misses          #   99.17% of all iTLB cache hits   (19.69%)
+   <not supported>      L1-dcache-prefetches                                        
+       107,517,081      L1-dcache-prefetch-misses #    0.903 M/sec                    (25.17%)
+
+      31.469847038 seconds time elapsed
+
+     118.865305000 seconds user
+       0.231239000 seconds sys
+
+
+3000 10
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+         14,490.04 msec task-clock                #    3.557 CPUs utilized          
+             2,301      context-switches          #    0.159 K/sec                  
+                 5      cpu-migrations            #    0.000 K/sec                  
+            18,399      page-faults               #    0.001 M/sec                  
+    49,017,932,232      cycles                    #    3.383 GHz                      (25.38%)
+    29,621,955,320      stalled-cycles-frontend   #   60.43% frontend cycles idle     (25.75%)
+    63,251,487,021      instructions              #    1.29  insn per cycle         
+                                                  #    0.47  stalled cycles per insn  (32.84%)
+     7,523,920,294      branches                  #  519.248 M/sec                    (31.79%)
+        24,871,735      branch-misses             #    0.33% of all branches          (31.94%)
+    22,632,659,353      L1-dcache-loads           # 1561.946 M/sec                    (18.89%)
+        72,349,386      L1-dcache-load-misses     #    0.32% of all L1-dcache hits    (16.13%)
+        35,044,095      LLC-loads                 #    2.418 M/sec                    (16.05%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         4,475,609      L1-icache-load-misses                                         (20.87%)
+    22,578,916,715      dTLB-loads                # 1558.237 M/sec                    (17.53%)
+         2,183,964      dTLB-load-misses          #    0.01% of all dTLB cache hits   (16.33%)
+            76,356      iTLB-loads                #    0.005 M/sec                    (14.55%)
+            98,409      iTLB-load-misses          #  128.88% of all iTLB cache hits   (19.60%)
+   <not supported>      L1-dcache-prefetches                                        
+        18,301,929      L1-dcache-prefetch-misses #    1.263 M/sec                    (25.57%)
+
+       4.073775546 seconds time elapsed
+
+      14.460084000 seconds user
+       0.039714000 seconds sys
+
+
+3000 100
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+        282,159.80 msec task-clock                #    3.801 CPUs utilized          
+            48,404      context-switches          #    0.172 K/sec                  
+                37      cpu-migrations            #    0.000 K/sec                  
+            35,407      page-faults               #    0.125 K/sec                  
+   953,785,983,817      cycles                    #    3.380 GHz                      (24.69%)
+   586,471,168,370      stalled-cycles-frontend   #   61.49% frontend cycles idle     (26.10%)
+ 1,264,776,914,749      instructions              #    1.33  insn per cycle         
+                                                  #    0.46  stalled cycles per insn  (33.23%)
+   146,572,745,589      branches                  #  519.467 M/sec                    (33.30%)
+        50,858,993      branch-misses             #    0.03% of all branches          (32.69%)
+   448,057,952,412      L1-dcache-loads           # 1587.958 M/sec                    (19.46%)
+       556,617,522      L1-dcache-load-misses     #    0.12% of all L1-dcache hits    (17.86%)
+       184,140,914      LLC-loads                 #    0.653 M/sec                    (16.92%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        65,512,432      L1-icache-load-misses                                         (20.14%)
+   447,269,518,812      dTLB-loads                # 1585.164 M/sec                    (17.36%)
+        32,643,841      dTLB-load-misses          #    0.01% of all dTLB cache hits   (17.73%)
+         1,146,201      iTLB-loads                #    0.004 M/sec                    (15.33%)
+           993,723      iTLB-load-misses          #   86.70% of all iTLB cache hits   (19.75%)
+   <not supported>      L1-dcache-prefetches                                        
+       251,745,219      L1-dcache-prefetch-misses #    0.892 M/sec                    (25.14%)
+
+      74.224066286 seconds time elapsed
+
+     281.559426000 seconds user
+       0.796456000 seconds sys
+
+
+4000 10
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+         32,674.72 msec task-clock                #    3.579 CPUs utilized          
+             4,984      context-switches          #    0.153 K/sec                  
+                 7      cpu-migrations            #    0.000 K/sec                  
+            32,502      page-faults               #    0.995 K/sec                  
+   110,548,779,681      cycles                    #    3.383 GHz                      (24.54%)
+    67,051,470,729      stalled-cycles-frontend   #   60.65% frontend cycles idle     (25.81%)
+   143,421,166,429      instructions              #    1.30  insn per cycle         
+                                                  #    0.47  stalled cycles per insn  (32.97%)
+    16,953,458,386      branches                  #  518.856 M/sec                    (33.04%)
+        44,458,068      branch-misses             #    0.26% of all branches          (32.71%)
+    51,350,017,974      L1-dcache-loads           # 1571.552 M/sec                    (18.91%)
+       141,825,052      L1-dcache-load-misses     #    0.28% of all L1-dcache hits    (16.96%)
+        81,698,708      LLC-loads                 #    2.500 M/sec                    (17.09%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+         9,997,702      L1-icache-load-misses                                         (20.27%)
+    51,121,508,287      dTLB-loads                # 1564.558 M/sec                    (18.04%)
+         4,249,363      dTLB-load-misses          #    0.01% of all dTLB cache hits   (18.22%)
+           329,398      iTLB-loads                #    0.010 M/sec                    (15.02%)
+           255,596      iTLB-load-misses          #   77.59% of all iTLB cache hits   (19.37%)
+   <not supported>      L1-dcache-prefetches                                        
+        36,943,447      L1-dcache-prefetch-misses #    1.131 M/sec                    (25.06%)
+
+       9.128635434 seconds time elapsed
+
+      32.622992000 seconds user
+       0.071830000 seconds sys
+
+
+4000 100
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+        548,631.20 msec task-clock                #    3.798 CPUs utilized          
+            91,643      context-switches          #    0.167 K/sec                  
+                67      cpu-migrations            #    0.000 K/sec                  
+            55,150      page-faults               #    0.101 K/sec                  
+ 1,854,729,028,451      cycles                    #    3.381 GHz                      (24.18%)
+ 1,140,112,027,178      stalled-cycles-frontend   #   61.47% frontend cycles idle     (25.62%)
+ 2,463,471,214,815      instructions              #    1.33  insn per cycle         
+                                                  #    0.46  stalled cycles per insn  (32.75%)
+   285,466,108,802      branches                  #  520.324 M/sec                    (32.68%)
+        81,566,071      branch-misses             #    0.03% of all branches          (32.07%)
+   872,241,395,102      L1-dcache-loads           # 1589.850 M/sec                    (19.67%)
+     1,055,472,661      L1-dcache-load-misses     #    0.12% of all L1-dcache hits    (17.87%)
+       299,993,063      LLC-loads                 #    0.547 M/sec                    (17.18%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+       122,642,081      L1-icache-load-misses                                         (20.46%)
+   873,166,687,065      dTLB-loads                # 1591.537 M/sec                    (17.37%)
+        57,200,911      dTLB-load-misses          #    0.01% of all dTLB cache hits   (17.69%)
+         1,770,135      iTLB-loads                #    0.003 M/sec                    (15.28%)
+         6,167,121      iTLB-load-misses          #  348.40% of all iTLB cache hits   (19.74%)
+   <not supported>      L1-dcache-prefetches                                        
+       486,184,663      L1-dcache-prefetch-misses #    0.886 M/sec                    (25.10%)
+
+     144.457167954 seconds time elapsed
+
+     547.486095000 seconds user
+       1.502221000 seconds sys
+
+
+5000 10
+bfs_loop_unrolling.cpp: In member function ‘void graph::get_data()’:
+bfs_loop_unrolling.cpp:91:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+       for (size_t j = 0; j < n; j++) {
+                          ~~^~~
+
+ Performance counter stats for './bfs_loop_unrolling':
+
+         61,711.23 msec task-clock                #    3.641 CPUs utilized          
+             9,426      context-switches          #    0.153 K/sec                  
+                14      cpu-migrations            #    0.000 K/sec                  
+            50,615      page-faults               #    0.820 K/sec                  
+   208,800,762,703      cycles                    #    3.384 GHz                      (25.10%)
+   126,961,003,832      stalled-cycles-frontend   #   60.80% frontend cycles idle     (26.17%)
+   272,952,029,561      instructions              #    1.31  insn per cycle         
+                                                  #    0.47  stalled cycles per insn  (33.33%)
+    32,105,418,044      branches                  #  520.252 M/sec                    (32.94%)
+        69,078,586      branch-misses             #    0.22% of all branches          (32.55%)
+    97,516,879,627      L1-dcache-loads           # 1580.213 M/sec                    (19.46%)
+       248,286,082      L1-dcache-load-misses     #    0.25% of all L1-dcache hits    (17.66%)
+       151,214,702      LLC-loads                 #    2.450 M/sec                    (17.10%)
+   <not supported>      LLC-load-misses                                             
+   <not supported>      L1-icache-loads                                             
+        18,872,604      L1-icache-load-misses                                         (20.74%)
+    97,055,216,773      dTLB-loads                # 1572.732 M/sec                    (17.14%)
+        13,623,687      dTLB-load-misses          #    0.01% of all dTLB cache hits   (17.60%)
+           395,327      iTLB-loads                #    0.006 M/sec                    (14.83%)
+           374,793      iTLB-load-misses          #   94.81% of all iTLB cache hits   (19.34%)
+   <not supported>      L1-dcache-prefetches                                        
+        67,562,240      L1-dcache-prefetch-misses #    1.095 M/sec                    (25.08%)
+
+      16.949135934 seconds time elapsed
+
+      61.593045000 seconds user
+       0.155427000 seconds sys
+
+
+5000 100
+
