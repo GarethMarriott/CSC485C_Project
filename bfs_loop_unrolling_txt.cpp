@@ -243,13 +243,19 @@ int main(int argc, char const *argv[])
   int num_threads = stoi(argv[2]);
   omp_set_num_threads(num_threads);
   
+  auto full_start = std::chrono::steady_clock::now();
+
   graph graph;
   graph.get_data(filename);
   auto start = std::chrono::steady_clock::now();
   graph.bfs();
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<long double> time = end - start;
-  std::cout << time.count() << std::endl;
+  std::cout << "BFS run time : " << time.count() << std::endl;
+
+  std::chrono::duration<long double> full_time = end - full_start;
+  std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
+
   // graph.print();
   // graph.print_path(2, 1);
   return 0;
