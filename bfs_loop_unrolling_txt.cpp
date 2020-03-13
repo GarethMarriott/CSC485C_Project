@@ -8,6 +8,7 @@
 #include <vector>
 #include <queue>
 #include <omp.h>
+#include <chrono>
 
 using namespace std;
 
@@ -36,7 +37,7 @@ struct node
         parent = p;
         depth = d;
     }
-};
+}; 
 
 void graph::get_data(std::string filename)
 {
@@ -241,7 +242,11 @@ int main(int argc, char const *argv[])
   std::string filename(argv[1]);
   graph graph;
   graph.get_data(filename);
+  auto start = std::chrono::steady_clock::now();
   graph.bfs();
+  auto end = std::chrono::steady_clock::now();
+  std::chrono::duration<long double> time = end - start;
+  std::cout << time.count() << std::endl;
   // graph.print();
   // graph.print_path(2, 1);
   return 0;
