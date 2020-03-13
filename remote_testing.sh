@@ -53,3 +53,11 @@ echo 20000-1000:
 ./create_matrix_txt 20000 1000 1 > 20000-1000matrix.txt
 ./$1 20000-1000matrix.txt $2
 rm -r 20000-1000matrix.txt
+echo 30000-1000:
+./create_matrix_txt 30000 1000 1 > 30000-1000matrix.txt
+./$1 30000-1000matrix.txt $2
+rm -r 30000-1000matrix.txt
+echo 40000-1000:
+./create_matrix_txt 40000 1000 1 > 40000-1000matrix.txt
+./$1 40000-1000matrix.txt $2
+rm -r 40000-1000matrix.txt
