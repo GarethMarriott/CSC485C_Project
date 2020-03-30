@@ -22,12 +22,18 @@ int const blocksize = 512;
 class graph
 {
    int n;
-   thrust::host_vector< thrust::host_vector<int> > distance;
-   thrust::host_vector< thrust::host_vector<int> > path;
-   thrust::host_vector< thrust::host_vector<int> > adjacency_list;
-   thrust::host_vector<int> adjacency_offset;
-   thrust::host vector<int> adjacency_size;
-   thrust::host_vector< thrust::host_vector<bool> > discovered;
+   // thrust::host_vector< thrust::host_vector<int> > distance;
+   // thrust::host_vector< thrust::host_vector<int> > path;
+   // thrust::host_vector< thrust::host_vector<int> > adjacency_list;
+   // thrust::host_vector<int> adjacency_offset;
+   // thrust::host_vector<int> adjacency_size;
+   // thrust::host_vector< thrust::host_vector<bool> > discovered;
+   vector< vector<int> > distance;
+   vector< vector<int> > path;
+   vector< vector<int> > adjacency_list;
+   vector<int> adjacency_offset;
+   vector<int> adjacency_size;
+   vector< vector<bool> > discovered;
    public:
         void get_data(std::string filename);
         void bfs();
@@ -46,10 +52,15 @@ struct node
         parent = p;
         depth = d;
     }
+    node(){
+      value = 0;
+      parent = 0;
+      depth = 0;
+    }
 };
 
 __global__
-void process_row( float *dev_adjacency_list , float *dev_discovered , float *dev_path , float *dev_distance , size_t n )
+void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path , int *dev_distance , int *dev_adjacency_offset , int *dev_adjacency_size , size_t n )
 {
   int const idx = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -66,7 +77,7 @@ void process_row( float *dev_adjacency_list , float *dev_discovered , float *dev
       head = 0;
       tail = 0;
 
-      for(int j=0; j<dev_adjacency_list[i].size(); j++)
+      for(int j=0; j<dev_adjacency_size[i]; j++)
       {
           queue[tail++] = node(dev_adjacency_list[i][j], i, 1);
           dev_discovered[i][dev_adjacency_list[i][j]] = true;
@@ -135,24 +146,46 @@ void graph::get_data(std::string filename)
     path.resize(n);
     discovered.resize(n);
 
+    adjacency_offset.resize(n);
+    adjacency_size.resize(n);
+
+    int adj_size = 0;
+
     for(int i=0; getline(f, curr_row); i++){
         // if (i%10 == 0) {
         //   printf("%d\n", i);
         // }
+
+        adjacency_offset[i] = adj_size;
+
         std::stringstream ss(curr_row);
-        int j=0;
         while(getline(ss, curr_row, ' ')){
-            if(stoi(curr_row) > 0){
-                adjacency_list[i].push_back(j);
-            }
+            adjacency_list[i].push_back(stoi(curr_row));
+            adj_size++;
             //adjacency[i].push_back(stoi(curr_row));
-            path[i].push_back(-1);
-            distance[i].push_back(-1);
-            discovered[i].push_back(false);
-            j++;
         }
+
+        adjacency_size[i] = adj_size - adjacency_offset[i];
+
     }
 
+    //#pragma omp parallel for
+    for(int i=0; i<n; i++){
+        path[i].resize(n, -1);
+        distance[i].resize(n, -1);
+        discovered[i].resize(n, false);
+    }
+
+    // #pragma omp parallel for
+    // for(int i=0; i<n; i++){
+    //     for(int j=0; j<n; j++){
+    //         path[i][j] = -1;
+    //         distance[i][j] = -1;
+    //         discovered[i][j] = false;
+    //     }
+    // }
+
+    //#pragma omp parallel for
     for(int i=0; i<n; i++){
         path[i][i] = i;
         distance[i][i] = 0;
@@ -195,20 +228,39 @@ void graph::bfs()
 {
     auto const size = sizeof(int) * n;
 
+    int E = thrust::reduce(adjacency_size.begin(), adjacency_size.end());
 
     auto const num_blocks = ceil( n / static_cast< float >( blocksize ) );
     float *dev_row, *dev_result;
 
     float result[ n ];
 
-    thrust::device_vector< thrust::device_vector< int > > dev_adjacency_list = adjacency_list;
-    thrust::device_vector< thrust::device_vector< int > > dev_discovered = discovered;
-    thrust::device_vector< thrust::device_vector< int > > dev_path = path;
-    thrust::device_vector< thrust::device_vector< int > > dev_distance = distance;
+    //int *d_adjacency_list;
 
-    
+    //int *testarray = adjacency_list[0].data();
 
-    process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, n );
+    int *dev_adjacency_list = adjacency_list[0].data();
+    bool *dev_discovered = discovered[0].data();
+    int *dev_path = path[0].data();
+    int *dev_distance = distance[0].data();
+    int *dev_adjacency_offset = adjacency_offset.data();
+    int *dev_adjacency_size = adjacency_size.data();
+
+    // thrust::device_vector< thrust::device_vector< int > > d_adjacency_list = adjacency_list;
+    // thrust::device_vector< thrust::device_vector< bool > > d_discovered = discovered;
+    // thrust::device_vector< thrust::device_vector< int > > d_path = path;
+    // thrust::device_vector< thrust::device_vector< int > > d_distance = distance;
+    // thrust::device_vector< int > d_adjacency_offset = adjacency_offset;
+    // thrust::device_vector< int > d_adjacency_size = adjacency_size;
+    //
+    // int *dev_adjacency_list = thrust::raw_pointer_cast(&d_adjacency_list[0][0]);
+    // bool *dev_discovered = thrust::raw_pointer_cast(d_discovered[0].data());
+    // int *dev_path = thrust::raw_pointer_cast(d_path[0].data());
+    // int *dev_distance = thrust::raw_pointer_cast(d_distance[0].data());
+    // int *dev_adjacency_offset = thrust::raw_pointer_cast(d_adjacency_offset.data());
+    // int *dev_adjacency_size = thrust::raw_pointer_cast(d_adjacency_size.data());
+
+    process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, dev_adjacency_offset, dev_adjacency_size, n );
 
     //adjacency_list = dev_adjacency_list;
     //discovered = dev_discovered;

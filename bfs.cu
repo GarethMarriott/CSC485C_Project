@@ -44,14 +44,20 @@ struct node
         parent = p;
         depth = d;
     }
+    node()
+    {
+	value = 0;
+	parent = 0;
+	depth = 0;
+    }
 };
 
 __global__
 void process_row( float *dev_adjacency_list , float *dev_discovered , float *dev_path , float *dev_distance , size_t n )
 {
-  int const i = threadIdx.x + blockIdx.x * blockDim.x;
+  int const idx = threadIdx.x + blockIdx.x * blockDim.x;
 
-  const struct node queue[n];
+  struct node* queue = (struct node*)malloc(sizeof(struct node) * n);
   int head;
   int tail;
   struct node curr;
@@ -64,10 +70,10 @@ void process_row( float *dev_adjacency_list , float *dev_discovered , float *dev
       head = 0;
       tail = 0;
 
-      for(int j=0; j<adjacency_list[i].size(); j++)
+      for(int j=0; j<dev_adjacency_list[i].size(); j++)
       {
-          queue[tail++] = node(adjacency_list[i][j], i, 1);
-          discovered[i][adjacency_list[i][j]] = true;
+          queue[tail++] = node(dev_adjacency_list[i][j], i, 1);
+          dev_discovered[i][dev_adjacency_list[i][j]] = true;
       }
 
 
