@@ -9,8 +9,9 @@
 #include <queue>
 #include <omp.h>
 #include <chrono>
-#include <thrust/host_vector.h>
-#include <thrust/device_vector.h>
+#include <numeric>
+// #include <thrust/host_vector.h>
+// #include <thrust/device_vector.h>
 
 using namespace std;
 
@@ -227,24 +228,61 @@ void graph::print_path(int start, int finish)
 void graph::bfs()
 {
     auto const size = sizeof(int) * n;
-
-    int E = thrust::reduce(adjacency_size.begin(), adjacency_size.end());
-
     auto const num_blocks = ceil( n / static_cast< float >( blocksize ) );
-    float *dev_row, *dev_result;
 
-    float result[ n ];
+    int E = std::accumulate(adjacency_size.begin(), adjacency_size.end(), 0);
 
-    //int *d_adjacency_list;
+    int* adjacency_list_array = (int*)malloc(sizeof(int)*E);
+    int index = 0;
+    for (int i = 0; i < adjacency_list.size(); i++) {
+      for (int j = 0; j < adjacency_list[i].size(); j++) {
+        adjacency_list_array[index] = adjacency_list[i][j];
+        index++;
+      }
+    }
 
-    //int *testarray = adjacency_list[0].data();
+    bool* discovered_array = (bool*)malloc(sizeof(bool)*n*n);
+    int* path_array        = (int*)malloc(sizeof(int)*n*n);
+    int* distance_array    = (int*)malloc(sizeof(int)*n*n);
+    for (int i = 0; i < adjacency_list.size(); i++) {
+      for (int j = 0; j < adjacency_list[i].size(); j++) {
+        discovered_array[i*n+j] = discovered[i][j];
+        path_array[i*n+j]       = path[i][j];
+        distance_array[i*n+j]   = distance[i][j];
+      }
+    }
 
-    int *dev_adjacency_list = adjacency_list[0].data();
-    bool *dev_discovered = discovered[0].data();
-    int *dev_path = path[0].data();
-    int *dev_distance = distance[0].data();
-    int *dev_adjacency_offset = adjacency_offset.data();
-    int *dev_adjacency_size = adjacency_size.data();
+    int* adjacency_offset_array = (int*)malloc(sizeof(int)*n);
+    int* adjacency_size_array   = (int*)malloc(sizeof(int)*n);
+
+    for (int i = 0; i < n; i++) {
+      adjacency_offset_array[i] = adjacency_offset[i];
+      adjacency_size_array[i]   = adjacency_size[i];
+    }
+
+    int* dev_adjacency_list;
+    bool* dev_discovered;
+    int* dev_path;
+    int* dev_distance;
+    int* dev_adjacency_offset;
+    int* dev_adjacency_size;
+
+    cudaMalloc( (void **) &dev_adjacency_list, sizeof(int)*E);
+    cudaMalloc( (void **) &dev_discovered, sizeof(bool)*n*n);
+    cudaMalloc( (void **) &dev_path, sizeof(int)*n*n);
+    cudaMalloc( (void **) &dev_distance, sizeof(int)*n*n);
+    cudaMalloc( (void **) &dev_adjacency_offset, sizeof(int)*n);
+    cudaMalloc( (void **) &dev_adjacency_size, sizeof(int)*n);
+
+    cudaMemcpy( dev_adjacency_list, adjacency_list_array, sizeof(int)*E, cudaMemcpyHostToDevice );
+    cudaMemcpy( dev_discovered, discovered_array, sizeof(bool)*n*n, cudaMemcpyHostToDevice );
+    cudaMemcpy( dev_path, path_array, sizeof(int)*n*n, cudaMemcpyHostToDevice );
+    cudaMemcpy( dev_distance, distance_array, sizeof(int)*n*n, cudaMemcpyHostToDevice );
+    cudaMemcpy( dev_adjacency_offset, adjacency_offset_array, sizeof(int)*n, cudaMemcpyHostToDevice );
+    cudaMemcpy( dev_adjacency_size, adjacency_size_array, sizeof(int)*n, cudaMemcpyHostToDevice );
+
+    process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, dev_adjacency_offset, dev_adjacency_size, n );
+
 
     // thrust::device_vector< thrust::device_vector< int > > d_adjacency_list = adjacency_list;
     // thrust::device_vector< thrust::device_vector< bool > > d_discovered = discovered;
@@ -260,12 +298,10 @@ void graph::bfs()
     // int *dev_adjacency_offset = thrust::raw_pointer_cast(d_adjacency_offset.data());
     // int *dev_adjacency_size = thrust::raw_pointer_cast(d_adjacency_size.data());
 
-    process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, dev_adjacency_offset, dev_adjacency_size, n );
 
     //adjacency_list = dev_adjacency_list;
     //discovered = dev_discovered;
-    distance = dev_distance;
-    path = dev_path;
+
 }
 
 
