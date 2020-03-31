@@ -42,66 +42,82 @@ class graph
         void print_path(int start, int goal);
 };
 
+// struct node
+// {
+//     int value;
+//     int parent;
+//     int depth;
+//     node(int v, int p, int d)
+//     {
+//         value = v;
+//         parent = p;
+//         depth = d;
+//     }
+//     node(){
+//       value = 0;
+//       parent = 0;
+//       depth = 0;
+//     }
+// };
+__device__
 struct node
 {
     int value;
     int parent;
     int depth;
-    node(int v, int p, int d)
-    {
-        value = v;
-        parent = p;
-        depth = d;
-    }
-    node(){
-      value = 0;
-      parent = 0;
-      depth = 0;
-    }
+    // node(int v, int p, int d)
+    // {
+    //     value = v;
+    //     parent = p;
+    //     depth = d;
+    // }
+    // node(){
+    //   value = 0;
+    //   parent = 0;
+    //   depth = 0;
+    // }
 };
 
 __global__
 void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path , int *dev_distance , int *dev_adjacency_offset , int *dev_adjacency_size , size_t n )
 {
-  int const idx = threadIdx.x + blockIdx.x * blockDim.x;
 
+  int const idx = threadIdx.x + blockIdx.x * blockDim.x;
+  if (idx<n) {
+    /* code */
+  }
   struct node* queue = (struct node*)malloc(sizeof(struct node)*n);
   int head;
   int tail;
   struct node curr;
-  for(int i=0; i<n; i++)
-  {
-      //if (i%10 == 0) {
-      //  cout << "\r" << i << std::flush;
-      //}
 
-      head = 0;
-      tail = 0;
+    head = 0;
+    tail = 0;
 
-      for(int j=0; j<dev_adjacency_size[i]; j++)
-      {
-          queue[tail++] = node(dev_adjacency_list[i][j], i, 1);
-          dev_discovered[i][dev_adjacency_list[i][j]] = true;
-      }
+    for(int j=0; j<dev_adjacency_size[idx]; j++)
+    {
+        queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[idx]+j], idx, 1};
+        dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[idx]+j]] = true;
+    }
 
 
-      while(head != tail)
-      {
-          curr = queue[head++];
+    while(head != tail)
+    {
+        curr = queue[head++];
 
-          path[i][curr.value] = curr.parent;
-          distance[i][curr.value] = curr.depth;
+        dev_path[idx*n + curr.value] = curr.parent;
+        dev_distance[idx*n + curr.value] = curr.depth;
 
-          for(int j=0; j<adjacency_list[curr.value].size(); j++)
-          {
-              if(!discovered[i][adjacency_list[curr.value][j]])
-              {
-                  queue[tail++] = node(adjacency_list[curr.value][j], curr.value, curr.depth + 1);
-                  discovered[i][adjacency_list[curr.value][j]] = true;
-              }
-          }
-      }
-  }
+        for(int j=0; j<dev_adjacency_size[curr.value]; j++)
+        {
+            if(!dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]])
+            {
+                queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[curr.value]+j], curr.value, curr.depth + 1};
+                dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]] = true;
+            }
+        }
+    }
+
 
 }
 
@@ -282,6 +298,9 @@ void graph::bfs()
     cudaMemcpy( dev_adjacency_size, adjacency_size_array, sizeof(int)*n, cudaMemcpyHostToDevice );
 
     process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, dev_adjacency_offset, dev_adjacency_size, n );
+
+    cudaMemcpy( path_array, dev_path, sizeof(int)*n*n, cudaMemcpyDeviceToHost );
+    cudaMemcpy( distance_array, dev_distance, sizeof(int)*n*n, cudaMemcpyDeviceToHost );
 
 
     // thrust::device_vector< thrust::device_vector< int > > d_adjacency_list = adjacency_list;
