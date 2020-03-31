@@ -101,33 +101,33 @@ void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path
     int tail;
     struct node curr;
 
-      head = 0;
-      tail = 0;
+    head = 0;
+    tail = 0;
 
-      for(int j=0; j<dev_adjacency_size[idx]; j++)
-      {
-          queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[idx]+j], idx, 1};
-          dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[idx]+j]] = true;
+    for(int j=0; j<dev_adjacency_size[idx]; j++)
+    {
+        queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[idx]+j], idx, 1};
+        dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[idx]+j]] = true;
+    }
+
+
+    while(head != tail)
+    {
+        curr = queue[head++];
+
+        dev_path[idx*n + curr.value] = curr.parent;
+        dev_distance[idx*n + curr.value] = curr.depth;
+
+        for(int j=0; j<dev_adjacency_size[curr.value]; j++)
+        {
+            if(!dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]])
+            {
+                queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[curr.value]+j], curr.value, curr.depth + 1};
+                dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]] = true;
+            }
+        }
       }
-
-
-      while(head != tail)
-      {
-          curr = queue[head++];
-
-          dev_path[idx*n + curr.value] = curr.parent;
-          dev_distance[idx*n + curr.value] = curr.depth;
-
-          for(int j=0; j<dev_adjacency_size[curr.value]; j++)
-          {
-              if(!dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]])
-              {
-                  queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[curr.value]+j], curr.value, curr.depth + 1};
-                  dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]] = true;
-              }
-          }
-      }
-
+    free(queue);
     }
 }
 
