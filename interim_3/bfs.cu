@@ -82,43 +82,53 @@ __global__
 void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path , int *dev_distance , int *dev_adjacency_offset , int *dev_adjacency_size , size_t n )
 {
 
+
+
   int const idx = threadIdx.x + blockIdx.x * blockDim.x;
   if (idx<n) {
-    /* code */
-  }
-  struct node* queue = (struct node*)malloc(sizeof(struct node)*n);
-  int head;
-  int tail;
-  struct node curr;
 
-    head = 0;
-    tail = 0;
+    // if(idx<1){
+    //   for(int i=0; i<n; i++){
+    //     for(int j=0; j<n; j++){
+    //       printf("%d ", dev_path[i*n+j]);
+    //     }
+    //     printf("\n");
+    //   }
+    // }
 
-    for(int j=0; j<dev_adjacency_size[idx]; j++)
-    {
-        queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[idx]+j], idx, 1};
-        dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[idx]+j]] = true;
+    struct node* queue = (struct node*)malloc(sizeof(struct node)*n);
+    int head;
+    int tail;
+    struct node curr;
+
+      head = 0;
+      tail = 0;
+
+      for(int j=0; j<dev_adjacency_size[idx]; j++)
+      {
+          queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[idx]+j], idx, 1};
+          dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[idx]+j]] = true;
+      }
+
+
+      while(head != tail)
+      {
+          curr = queue[head++];
+
+          dev_path[idx*n + curr.value] = curr.parent;
+          dev_distance[idx*n + curr.value] = curr.depth;
+
+          for(int j=0; j<dev_adjacency_size[curr.value]; j++)
+          {
+              if(!dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]])
+              {
+                  queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[curr.value]+j], curr.value, curr.depth + 1};
+                  dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]] = true;
+              }
+          }
+      }
+
     }
-
-
-    while(head != tail)
-    {
-        curr = queue[head++];
-
-        dev_path[idx*n + curr.value] = curr.parent;
-        dev_distance[idx*n + curr.value] = curr.depth;
-
-        for(int j=0; j<dev_adjacency_size[curr.value]; j++)
-        {
-            if(!dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]])
-            {
-                queue[tail++] = node{dev_adjacency_list[dev_adjacency_offset[curr.value]+j], curr.value, curr.depth + 1};
-                dev_discovered[idx*n + dev_adjacency_list[dev_adjacency_offset[curr.value]+j]] = true;
-            }
-        }
-    }
-
-
 }
 
 void graph::get_data(std::string filename)
@@ -260,8 +270,8 @@ void graph::bfs()
     bool* discovered_array = (bool*)malloc(sizeof(bool)*n*n);
     int* path_array        = (int*)malloc(sizeof(int)*n*n);
     int* distance_array    = (int*)malloc(sizeof(int)*n*n);
-    for (int i = 0; i < adjacency_list.size(); i++) {
-      for (int j = 0; j < adjacency_list[i].size(); j++) {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
         discovered_array[i*n+j] = discovered[i][j];
         path_array[i*n+j]       = path[i][j];
         distance_array[i*n+j]   = distance[i][j];
@@ -275,6 +285,13 @@ void graph::bfs()
       adjacency_offset_array[i] = adjacency_offset[i];
       adjacency_size_array[i]   = adjacency_size[i];
     }
+
+    // for(int i=0; i<n; i++){
+    //   for(int j=0; j<n; j++){
+    //     printf("%d ", path_array[i*n+j]);
+    //   }
+    //   printf("\n");
+    // }
 
     int* dev_adjacency_list;
     bool* dev_discovered;
@@ -302,7 +319,12 @@ void graph::bfs()
     cudaMemcpy( path_array, dev_path, sizeof(int)*n*n, cudaMemcpyDeviceToHost );
     cudaMemcpy( distance_array, dev_distance, sizeof(int)*n*n, cudaMemcpyDeviceToHost );
 
-
+    for(int i=0; i<n; i++){
+      for(int j=0; j<n; j++){
+        path[i][j] = path_array[i*n+j];
+        distance[i][j] = distance_array[i*n+j];
+      }
+    }
     // thrust::device_vector< thrust::device_vector< int > > d_adjacency_list = adjacency_list;
     // thrust::device_vector< thrust::device_vector< bool > > d_discovered = discovered;
     // thrust::device_vector< thrust::device_vector< int > > d_path = path;
@@ -378,7 +400,7 @@ int main(int argc, char const *argv[])
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
 
-  // graph.print();
+  graph.print();
   // graph.print_path(2, 1);
   return 0;
 }
