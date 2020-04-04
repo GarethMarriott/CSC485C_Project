@@ -300,12 +300,13 @@ void graph::bfs()
     int* dev_adjacency_offset;
     int* dev_adjacency_size;
 
-    cudaMalloc( (void **) &dev_adjacency_list, sizeof(int)*E);
-    cudaMalloc( (void **) &dev_discovered, sizeof(bool)*n*n);
-    cudaMalloc( (void **) &dev_path, sizeof(int)*n*n);
-    cudaMalloc( (void **) &dev_distance, sizeof(int)*n*n);
-    cudaMalloc( (void **) &dev_adjacency_offset, sizeof(int)*n);
-    cudaMalloc( (void **) &dev_adjacency_size, sizeof(int)*n);
+    cudaMallocManaged( (void **) &dev_adjacency_list, sizeof(int)*E);
+    cudaMallocManaged( (void **) &dev_discovered, sizeof(bool)*n*n);
+    cudaMallocManaged( (void **) &dev_path, sizeof(int)*n*n);
+    cudaMallocManaged( (void **) &dev_distance, sizeof(int)*n*n);
+    cudaMallocManaged( (void **) &dev_adjacency_offset, sizeof(int)*n);
+    cudaMallocManaged( (void **) &dev_adjacency_size, sizeof(int)*n);
+
 
     cudaMemcpy( dev_adjacency_list, adjacency_list_array, sizeof(int)*E, cudaMemcpyHostToDevice );
     cudaMemcpy( dev_discovered, discovered_array, sizeof(bool)*n*n, cudaMemcpyHostToDevice );
