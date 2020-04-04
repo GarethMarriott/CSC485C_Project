@@ -300,6 +300,18 @@ void graph::bfs()
     int* dev_adjacency_offset;
     int* dev_adjacency_size;
 
+    // size_t device_memory_free = 0;
+    // size_t device_memory_total = 0;
+    //
+    // cudaMemGetInfo(&device_memory_free , &device_memory_total);
+
+    size_t l_free = 0;
+    size_t l_total = 0;
+    cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
+
+    printf("%d\n", l_free);
+    printf("%d\n", l_total);
+
     cudaMallocManaged( (void **) &dev_adjacency_list, sizeof(int)*E);
     cudaMallocManaged( (void **) &dev_discovered, sizeof(bool)*n*n);
     cudaMallocManaged( (void **) &dev_path, sizeof(int)*n*n);
