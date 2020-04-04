@@ -315,14 +315,14 @@ void graph::bfs()
     size_t l_total = 0;
     cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
     printf("MEM TOTAl: %lu\n", l_total);
-    printf("MEM FREE BEFFORE: %lu\n", l_free);
+    printf("MEM FREE BEFORE: %lu\n", l_free);
 
-    cudaMallocManaged( (void **) &dev_adjacency_list, sizeof(int)*E);
-    cudaMallocManaged( (void **) &dev_discovered, sizeof(bool)*n*n);
-    cudaMallocManaged( (void **) &dev_path, sizeof(int)*n*n);
-    cudaMallocManaged( (void **) &dev_distance, sizeof(int)*n*n);
-    cudaMallocManaged( (void **) &dev_adjacency_offset, sizeof(int)*n);
-    cudaMallocManaged( (void **) &dev_adjacency_size, sizeof(int)*n);
+    cudaMalloc( (void **) &dev_adjacency_list, sizeof(int)*E);
+    cudaMalloc( (void **) &dev_discovered, sizeof(bool)*n*n);
+    cudaMalloc( (void **) &dev_path, sizeof(int)*n*n);
+    cudaMalloc( (void **) &dev_distance, sizeof(int)*n*n);
+    cudaMalloc( (void **) &dev_adjacency_offset, sizeof(int)*n);
+    cudaMalloc( (void **) &dev_adjacency_size, sizeof(int)*n);
 
     error_id = cudaMemGetInfo(&l_free, &l_total);
     printf("MEM FREE AFTER : %lu\n", l_free);
