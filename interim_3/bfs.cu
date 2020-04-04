@@ -97,6 +97,9 @@ void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path
     // }
 
     struct node* queue = (struct node*)malloc(sizeof(struct node)*n);
+    if (queue == NULL) {
+      printf("MALLOC ERROR\n");
+    }
     int head;
     int tail;
     struct node curr;
@@ -113,6 +116,9 @@ void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path
 
     while(head != tail)
     {
+        if (head == n-1) {
+          printf("ERROR\n");
+        }
         curr = queue[head++];
 
         dev_path[idx*n + curr.value] = curr.parent;
@@ -308,9 +314,8 @@ void graph::bfs()
     size_t l_free = 0;
     size_t l_total = 0;
     cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
-
-    printf("%d\n", l_free);
-    printf("%d\n", l_total);
+    printf("MEM TOTAl: %lu\n", l_total);
+    printf("MEM FREE BEFFORE: %lu\n", l_free);
 
     cudaMallocManaged( (void **) &dev_adjacency_list, sizeof(int)*E);
     cudaMallocManaged( (void **) &dev_discovered, sizeof(bool)*n*n);
@@ -318,6 +323,9 @@ void graph::bfs()
     cudaMallocManaged( (void **) &dev_distance, sizeof(int)*n*n);
     cudaMallocManaged( (void **) &dev_adjacency_offset, sizeof(int)*n);
     cudaMallocManaged( (void **) &dev_adjacency_size, sizeof(int)*n);
+
+    cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
+    printf("MEM FREE AFTER : %lu\n", l_free);
 
 
     cudaMemcpy( dev_adjacency_list, adjacency_list_array, sizeof(int)*E, cudaMemcpyHostToDevice );
