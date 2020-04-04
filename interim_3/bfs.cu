@@ -384,7 +384,7 @@ void graph::print()
 int main(int argc, char const *argv[])
 {
   std::string filename(argv[1]);
-  int num_threads = stoi(argv[2]);
+  // int num_threads = stoi(argv[2]);
   // omp_set_num_threads(num_threads);
 
   auto full_start = std::chrono::steady_clock::now();

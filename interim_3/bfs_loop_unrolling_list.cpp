@@ -37,7 +37,7 @@ struct node
         parent = p;
         depth = d;
     }
-}; 
+};
 
 void graph::get_data(std::string filename)
 {
@@ -92,7 +92,7 @@ void graph::get_data(std::string filename)
         }
     }
 
-    #pragma omp parallel for 
+    #pragma omp parallel for
     for(int i=0; i<n; i++){
         path[i].resize(n);
         distance[i].resize(n);
@@ -251,7 +251,7 @@ int main(int argc, char const *argv[])
   std::string filename(argv[1]);
   int num_threads = stoi(argv[2]);
   omp_set_num_threads(num_threads);
-  
+
   auto full_start = std::chrono::steady_clock::now();
 
   graph graph;
@@ -265,8 +265,8 @@ int main(int argc, char const *argv[])
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
 
-//   graph.print();
- 
+  graph.print();
+
 //   for(int i=0; i<10; i++){
 //       for(int j=0; j<10; j++){
 //           graph.print_path(i, j);
