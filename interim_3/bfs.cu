@@ -311,11 +311,11 @@ void graph::bfs()
     //
     // cudaMemGetInfo(&device_memory_free , &device_memory_total);
 
-    size_t l_free = 0;
-    size_t l_total = 0;
-    cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
-    printf("MEM TOTAl: %lu\n", l_total);
-    printf("MEM FREE BEFORE: %lu\n", l_free);
+    // size_t l_free = 0;
+    // size_t l_total = 0;
+    // cudaError_t error_id = cudaMemGetInfo(&l_free, &l_total);
+    // printf("MEM TOTAl: %lu\n", l_total);
+    // printf("MEM FREE BEFORE: %lu\n", l_free);
 
     cudaMalloc( (void **) &dev_adjacency_list, sizeof(int)*E);
     cudaMalloc( (void **) &dev_discovered, sizeof(bool)*n*n);
@@ -324,8 +324,8 @@ void graph::bfs()
     cudaMalloc( (void **) &dev_adjacency_offset, sizeof(int)*n);
     cudaMalloc( (void **) &dev_adjacency_size, sizeof(int)*n);
 
-    error_id = cudaMemGetInfo(&l_free, &l_total);
-    printf("MEM FREE AFTER : %lu\n", l_free);
+    // error_id = cudaMemGetInfo(&l_free, &l_total);
+    // printf("MEM FREE AFTER : %lu\n", l_free);
 
     cudaDeviceSetLimit(cudaLimitMallocHeapSize, 2*n*n*sizeof(struct node));
 
@@ -422,7 +422,7 @@ int main(int argc, char const *argv[])
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
 
-  graph.print();
+  // graph.print();
   // graph.print_path(2, 1);
   return 0;
 }
