@@ -4,6 +4,22 @@ do
 done
 g++ -Wall -o3 create_matrix_txt.cpp -o create_matrix_txt -std=c++17 -march=native
 g++ -Wall -o3 $1.cpp -o $1 -fopenmp -std=c++17 -march=native
+echo 1000-100:
+./create_matrix_txt 1000 100 1 > 1000-100matrix.txt
+./$1 1000-100matrix.txt $2
+rm -r 1000-100matrix.txt
+echo 2000-100:
+./create_matrix_txt 2000 100 1 > 2000-100matrix.txt
+./$1 2000-100matrix.txt $2
+rm -r 2000-100matrix.txt
+echo 3000-100:
+./create_matrix_txt 3000 100 1 > 3000-100matrix.txt
+./$1 3000-100matrix.txt $2
+rm -r 3000-100matrix.txt
+echo 4000-100:
+./create_matrix_txt 4000 100 1 > 4000-100matrix.txt
+./$1 4000-100matrix.txt $2
+rm -r 4000-100matrix.txt
 echo 5000-100:
 ./create_matrix_txt 5000 100 1 > 5000-100matrix.txt
 ./$1 5000-100matrix.txt $2
