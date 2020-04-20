@@ -9,23 +9,16 @@
 #include <queue>
 #include <omp.h>
 #include <chrono>
-#include <thrust/host_vector.h>
-#include <thrust/device_vector.h>
 
 using namespace std;
-
-int const blocksize = 512;
-
-
-
 
 class graph
 {
    int n;
-   thrust::host_vector< thrust::host_vector<int> > distance;
-   thrust::host_vector< thrust::host_vector<int> > path;
-   thrust::host_vector< thrust::host_vector<int> > adjacency_list;
-   thrust::host_vector< thrust::host_vector<bool> > discovered;
+   vector< vector<int> > distance;
+   vector< vector<int> > path;
+   vector< vector<int> > adjacency_list;
+   vector< vector<bool> > discovered;
    public:
         void get_data(std::string filename);
         void bfs();
@@ -44,58 +37,7 @@ struct node
         parent = p;
         depth = d;
     }
-    node()
-    {
-	value = 0;
-	parent = 0;
-	depth = 0;
-    }
 };
-
-__global__
-void process_row( float *dev_adjacency_list , float *dev_discovered , float *dev_path , float *dev_distance , size_t n )
-{
-  int const idx = threadIdx.x + blockIdx.x * blockDim.x;
-
-  struct node* queue = (struct node*)malloc(sizeof(struct node) * n);
-  int head;
-  int tail;
-  struct node curr;
-  for(int i=0; i<n; i++)
-  {
-      //if (i%10 == 0) {
-      //  cout << "\r" << i << std::flush;
-      //}
-
-      head = 0;
-      tail = 0;
-
-      for(int j=0; j<dev_adjacency_list[i].size(); j++)
-      {
-          queue[tail++] = node(dev_adjacency_list[i][j], i, 1);
-          dev_discovered[i][dev_adjacency_list[i][j]] = true;
-      }
-
-
-      while(head != tail)
-      {
-          curr = queue[head++];
-
-          path[i][curr.value] = curr.parent;
-          distance[i][curr.value] = curr.depth;
-
-          for(int j=0; j<adjacency_list[curr.value].size(); j++)
-          {
-              if(!discovered[i][adjacency_list[curr.value][j]])
-              {
-                  queue[tail++] = node(adjacency_list[curr.value][j], curr.value, curr.depth + 1);
-                  discovered[i][adjacency_list[curr.value][j]] = true;
-              }
-          }
-      }
-  }
-
-}
 
 void graph::get_data(std::string filename)
 {
@@ -144,19 +86,29 @@ void graph::get_data(std::string filename)
         //   printf("%d\n", i);
         // }
         std::stringstream ss(curr_row);
-        int j=0;
         while(getline(ss, curr_row, ' ')){
-            if(stoi(curr_row) > 0){
-                adjacency_list[i].push_back(j);
-            }
+            adjacency_list[i].push_back(stoi(curr_row));
             //adjacency[i].push_back(stoi(curr_row));
-            path[i].push_back(-1);
-            distance[i].push_back(-1);
-            discovered[i].push_back(false);
-            j++;
         }
     }
 
+    #pragma omp parallel for
+    for(int i=0; i<n; i++){
+        path[i].resize(n);
+        distance[i].resize(n);
+        discovered[i].resize(n);
+    }
+
+    #pragma omp parallel for
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            path[i][j] = -1;
+            distance[i][j] = -1;
+            discovered[i][j] = false;
+        }
+    }
+
+    #pragma omp parallel for
     for(int i=0; i<n; i++){
         path[i][i] = i;
         distance[i][i] = 0;
@@ -197,25 +149,65 @@ void graph::print_path(int start, int finish)
 
 void graph::bfs()
 {
-    auto const size = sizeof(int) * n;
 
 
-    auto const num_blocks = ceil( n / static_cast< float >( blocksize ) );
-    float *dev_row, *dev_result;
+    #pragma omp parallel for
+    for(int i=0; i<n; i++)
+    {
+        std::queue<node> q;
+        struct node curr = node(0, 0, 0);
+        // if (i%10 == 0) {
+        //   printf("%d\n", i);
+        // }
+        for(uint j=0; j<adjacency_list[i].size(); j++)
+        {
+            q.push(node(adjacency_list[i][j], i, 1));
+            discovered[i][adjacency_list[i][j]] = true;
+        }
 
-    float result[ n ];
 
-    thrust::device_vector< thrust::device_vector< int > > dev_adjacency_list = adjacency_list;
-    thrust::device_vector< thrust::device_vector< int > > dev_discovered = discovered;
-    thrust::device_vector< thrust::device_vector< int > > dev_path = path;
-    thrust::device_vector< thrust::device_vector< int > > dev_distance = distance;
+        while(!q.empty())
+        {
+            curr = q.front();
+            q.pop();
 
-    process_row<<< num_blocks, blocksize >>>( dev_adjacency_list, dev_discovered, dev_path, dev_distance, n );
+            path[i][curr.value] = curr.parent;
+            distance[i][curr.value] = curr.depth;
 
-    adjacency_list = dev_adjacency_list;
-    discovered = dev_discovered;
-    distance = dev_distance;
-    path = dev_path;
+            uint j=0;
+            for(; j+3<adjacency_list[curr.value].size(); j+=4)
+            {
+                if(!discovered[i][adjacency_list[curr.value][j]])
+                {
+                    q.push(node(adjacency_list[curr.value][j], curr.value, curr.depth + 1));
+                    discovered[i][adjacency_list[curr.value][j]] = true;
+                }
+                if(!discovered[i][adjacency_list[curr.value][j+1]])
+                {
+                    q.push(node(adjacency_list[curr.value][j+1], curr.value, curr.depth + 1));
+                    discovered[i][adjacency_list[curr.value][j+1]] = true;
+                }
+                if(!discovered[i][adjacency_list[curr.value][j+2]])
+                {
+                    q.push(node(adjacency_list[curr.value][j+2], curr.value, curr.depth + 1));
+                    discovered[i][adjacency_list[curr.value][j+2]] = true;
+                }
+                if(!discovered[i][adjacency_list[curr.value][j+3]])
+                {
+                    q.push(node(adjacency_list[curr.value][j+3], curr.value, curr.depth + 1));
+                    discovered[i][adjacency_list[curr.value][j+3]] = true;
+                }
+            }
+            for(; j<adjacency_list[curr.value].size(); j++)
+            {
+                if(!discovered[i][adjacency_list[curr.value][j]])
+                {
+                    q.push(node(adjacency_list[curr.value][j], curr.value, curr.depth + 1));
+                    discovered[i][adjacency_list[curr.value][j]] = true;
+                }
+            }
+        }
+    }
 }
 
 
@@ -258,7 +250,7 @@ int main(int argc, char const *argv[])
 {
   std::string filename(argv[1]);
   int num_threads = stoi(argv[2]);
-  // omp_set_num_threads(num_threads);
+  omp_set_num_threads(num_threads);
 
   auto full_start = std::chrono::steady_clock::now();
 
@@ -273,7 +265,13 @@ int main(int argc, char const *argv[])
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
 
-  // graph.print();
-  // graph.print_path(2, 1);
+  graph.print();
+
+//   for(int i=0; i<10; i++){
+//       for(int j=0; j<10; j++){
+//           graph.print_path(i, j);
+//       }
+//   }
+
   return 0;
 }
