@@ -41,33 +41,22 @@ struct node
 
 void graph::get_data(string filename)
 {
-  /*string line;
-  ifstream file ("test_matrix.txt");
-  while(getline(file,line)){
-      for(i=1;i<5;i++)
-        adjacency[i][j] = (int)line;
-  }
-
-
-  printf("\nEnter the total number of vertices: ");
-  scanf("%d",&n);
-  printf("\nEnter the adjacency matrix (If there is no \nedge betweent two vertex then enter 1000): \n\n");
-  for(i=1;i<=n;i++)
-  {
-       for(j=1;j<=n;j++)
-       {
-             scanf("%d", &adjacency[i][j]);
-       }
-  }*/
-
     string curr_row;
+
+    // std::cout << typeid(adjacency_list).name() << '\n';
 
     ifstream f(filename);
 
     std::getline(f, curr_row);
     n = stoi(curr_row);
 
-    //adjacency.resize(n);
+    // for (int i = 0; i < n; i++) {
+    //   for (int j = 0; j < adjacency_list[i].size(); j++) {
+		//       std::cout << adjacency_list[i][j] << " ";
+	  //   }
+    //   std::cout << " " << '\n';
+	  // }
+
     adjacency_list.resize(n);
     distance.resize(n);
     path.resize(n);
@@ -78,19 +67,29 @@ void graph::get_data(string filename)
         //   printf("%d\n", i);
         // }
         std::stringstream ss(curr_row);
-        int j=0;
         while(getline(ss, curr_row, ' ')){
-            if(stoi(curr_row) > 0){
-                adjacency_list[i].push_back(j);
-            }
+            adjacency_list[i].push_back(stoi(curr_row));
             //adjacency[i].push_back(stoi(curr_row));
-            path[i].push_back(-1);
-            distance[i].push_back(-1);
-            discovered[i].push_back(false);
-            j++;
         }
     }
 
+    //#pragma omp parallel for
+    for(int i=0; i<n; i++){
+        path[i].resize(n);
+        distance[i].resize(n);
+        discovered[i].resize(n);
+    }
+
+    //#pragma omp parallel for
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            path[i][j] = -1;
+            distance[i][j] = -1;
+            discovered[i][j] = false;
+        }
+    }
+
+    //#pragma omp parallel for
     for(int i=0; i<n; i++){
         path[i][i] = i;
         distance[i][i] = 0;
@@ -219,7 +218,7 @@ int main(int argc, char const *argv[])
 
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
-  // graph.print();
+  graph.print();
   // graph.print_path(2, 1);
   return 0;
 }
