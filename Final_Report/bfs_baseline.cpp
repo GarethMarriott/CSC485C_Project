@@ -218,7 +218,7 @@ int main(int argc, char const *argv[])
 
   std::chrono::duration<long double> full_time = end - full_start;
   std::cout << "BFS + preprocessing run time : " << full_time.count() << std::endl;
-  graph.print();
+  // graph.print();
   // graph.print_path(2, 1);
   return 0;
 }
