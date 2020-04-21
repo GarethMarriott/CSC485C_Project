@@ -8,7 +8,7 @@
 #include <list>
 #include <algorithm>
 
-//USAGE: ./createMatrix <width/height of matrix> <sparceness factor>
+//USAGE: ./createMatrix <width/height of matrix> <mean> <SD>
 
 // sparceness factor: percent chance a edge will be between any two nodes (1/sparceness)
 
@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]) {
 		std::list<int> adjacent_numbers;
 
 		for (int j = 0; j < number; j++) {
-			int edgeTo = rand() % size + 1;
+			int edgeTo = rand() % size;
 			bool found = (std::find(adjacent_numbers.begin(), adjacent_numbers.end(), edgeTo) != adjacent_numbers.end());
 			if (found && edgeTo > 0 && edgeTo != i) {
 				j--;
@@ -72,8 +72,12 @@ int main(int argc, char const *argv[]) {
 		adjacent_numbers.unique();
 		adjacent_numbers.sort();
 
+		// for (size_t num = 0; num < adjacent_numbers.size(); num++) {
+		// 	printf("%d ", adjacent_numbers[num]);
+		// }
+		// printf("\n");
 		for (auto it=adjacent_numbers.begin(); it!=adjacent_numbers.end(); ++it){
-    	std::cout << ' ' << *it;
+    	std::cout << *it << ' ';
 		}
 		std::cout << '\n';
 
