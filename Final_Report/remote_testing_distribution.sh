@@ -56,3 +56,27 @@ echo 40000:
 ./create_matrix 40000 $3 $4 > 40000matrix.txt
 ./$1 40000matrix.txt $2
 rm -r 40000matrix.txt
+echo 50000:
+./create_matrix 50000 $3 $4 > 50000matrix.txt
+./$1 50000matrix.txt $2
+rm -r 50000matrix.txt
+echo 60000:
+./create_matrix 60000 $3 $4 > 60000matrix.txt
+./$1 60000matrix.txt $2
+rm -r 60000matrix.txt
+echo 70000:
+./create_matrix 70000 $3 $4 > 70000matrix.txt
+./$1 70000matrix.txt $2
+rm -r 70000matrix.txt
+echo 80000:
+./create_matrix 80000 $3 $4 > 80000matrix.txt
+./$1 80000matrix.txt $2
+rm -r 80000matrix.txt
+echo 90000:
+./create_matrix 90000 $3 $4 > 90000matrix.txt
+./$1 90000matrix.txt $2
+rm -r 90000matrix.txt
+echo 100000:
+./create_matrix 100000 $3 $4 > 100000matrix.txt
+./$1 100000matrix.txt $2
+rm -r 100000matrix.txt

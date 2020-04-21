@@ -41,3 +41,50 @@ BFS + preprocessing run time : 59.529
 40000-1000:
 BFS run time : 90.3154
 BFS + preprocessing run time : 103.622
+
+TEST 2
+
+
+5000-100:
+BFS run time : 3.45839
+BFS + preprocessing run time : 3.71509
+6000-100:
+BFS run time : 4.36165
+BFS + preprocessing run time : 4.72768
+7000-100:
+BFS run time : 5.46346
+BFS + preprocessing run time : 5.95655
+8000-100:
+BFS run time : 6.56254
+BFS + preprocessing run time : 7.19747
+9000-100:
+BFS run time : 8.04013
+BFS + preprocessing run time : 8.82319
+---sparceness 100 done---
+5000-1000:
+BFS run time : 3.26534
+BFS + preprocessing run time : 3.50054
+6000-1000:
+BFS run time : 3.7236
+BFS + preprocessing run time : 4.0565
+7000-1000:
+BFS run time : 4.47078
+BFS + preprocessing run time : 4.9126
+8000-1000:
+BFS run time : 5.38355
+BFS + preprocessing run time : 5.94562
+9000-1000:
+BFS run time : 6.43822
+BFS + preprocessing run time : 7.14768
+10000-1000:
+BFS run time : 7.61008
+BFS + preprocessing run time : 8.47864
+20000-1000:
+BFS run time : 26.4143
+BFS + preprocessing run time : 29.7936
+30000-1000:
+BFS run time : 51.7401
+BFS + preprocessing run time : 59.4281
+40000-1000:
+BFS run time : 90.413
+BFS + preprocessing run time : 104.221
