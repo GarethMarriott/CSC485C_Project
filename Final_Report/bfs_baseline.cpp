@@ -133,9 +133,9 @@ void graph::bfs()
     struct node curr = node(0, 0, 0);
     for(int i=0; i<n; i++)
     {
-        if (i%10 == 0) {
-          cout << "\r" << i << std::flush;
-        }
+        // if (i%10 == 0) {
+        //   cout << "\r" << i << std::flush;
+        // }
         for(int j=0; j<adjacency_list[i].size(); j++)
         {
             q.push(node(adjacency_list[i][j], i, 1));
