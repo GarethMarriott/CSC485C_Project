@@ -11,7 +11,7 @@ import time
 new_url = "https://en.wikipedia.org/wiki/Special:AllPages"
 # new_url = "https://en.wikipedia.org/w/index.php?title=Special:AllPages&from=%22B%22+Is+for+Burglar"
 
-f = open("all_articles.txt", "w")
+f = open("all_articles_out.txt", "w")
 
 def scrap_page(url, count):
     # Download URL
@@ -50,7 +50,8 @@ def scrap_page(url, count):
         if link == None:
             continue
         if prog.match(link) and not prog_WIKI.match(link):
-            f.write(link+"\n")
+            short_link = link[6:]
+            f.write(short_link+"\n")
     print(random.choice(colors) + str(count), end="")
     print(Style.RESET_ALL, end="")
     print("", end ="\r")

@@ -41,3 +41,83 @@ BFS + preprocessing run time : 58.3364
 40000-1000:
 BFS run time : 89.4396
 BFS + preprocessing run time : 102.983
+
+
+
+
+1000-100:
+BFS run time : 1.89966
+BFS + preprocessing run time : 1.91371
+2000-100:
+BFS run time : 2.02003
+BFS + preprocessing run time : 2.06688
+3000-100:
+BFS run time : 1.74242
+BFS + preprocessing run time : 1.84419
+4000-100:
+BFS run time : 1.79494
+BFS + preprocessing run time : 1.9658
+5000-100:
+BFS run time : 3.42434
+BFS + preprocessing run time : 3.68317
+6000-100:
+BFS run time : 3.51204
+BFS + preprocessing run time : 3.88799
+7000-100:
+BFS run time : 5.82117
+BFS + preprocessing run time : 6.31616
+8000-100:
+BFS run time : 6.95485
+BFS + preprocessing run time : 7.59824
+9000-100:
+BFS run time : 7.42342
+BFS + preprocessing run time : 8.22826
+10000-100:
+BFS run time : 9.8522
+BFS + preprocessing run time : 10.8094
+20000-100:
+BFS run time : 38.3432
+BFS + preprocessing run time : 42.1071
+30000-100:
+BFS run time : 52.7436
+BFS + preprocessing run time : 61.223
+---sparceness 100 done---
+1000-1000:
+BFS run time : 1.64211
+BFS + preprocessing run time : 1.65506
+2000-1000:
+BFS run time : 1.62477
+BFS + preprocessing run time : 1.66781
+3000-1000:
+BFS run time : 1.63651
+BFS + preprocessing run time : 1.73073
+4000-1000:
+BFS run time : 1.60439
+BFS + preprocessing run time : 1.7591
+5000-1000:
+BFS run time : 3.15973
+BFS + preprocessing run time : 3.40277
+6000-1000:
+BFS run time : 3.04868
+BFS + preprocessing run time : 3.39043
+7000-1000:
+BFS run time : 4.63334
+BFS + preprocessing run time : 5.08918
+8000-1000:
+BFS run time : 4.56417
+BFS + preprocessing run time : 5.13005
+9000-1000:
+BFS run time : 6.12726
+BFS + preprocessing run time : 6.85975
+10000-1000:
+BFS run time : 7.69864
+BFS + preprocessing run time : 8.59542
+20000-1000:
+BFS run time : 26.5965
+BFS + preprocessing run time : 30.2604
+30000-1000:
+BFS run time : 51.3438
+BFS + preprocessing run time : 59.2297
+40000-1000:
+BFS run time : 91.3243
+BFS + preprocessing run time : 104.959

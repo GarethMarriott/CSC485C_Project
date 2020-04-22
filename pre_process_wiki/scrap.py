@@ -5,6 +5,8 @@ from colorama import Fore, Style
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+lines_dic = {}
+
 # url = "https://en.wikipedia.org/wiki/Sergei_Korolev"
 def scrap_page(url):
     # url = sys.argv[1]
@@ -40,14 +42,29 @@ def scrap_page(url):
 
         return valid_links
 
-
-
 in_file = open("all_articles_out.txt","r")
-out_file = open("all_articles.txt","w")
+out_file = open("all_articles_TEST.txt","w")
 
 num_lines = sys.argv[1]
+
 counter = 1
 
+
+for line in in_file:
+    line = line.strip('\n')
+    if counter < 10:
+        print(type(line))
+        print(repr(line))
+
+    lines_dic[line] = str(counter)
+    counter = counter + 1
+    # print(counter)
+
+in_file.close()
+print("done")
+in_file = open("all_articles_out.txt","r")
+
+counter = 1
 for line in in_file:
     print(str(counter) + "/" + num_lines)
 
@@ -57,7 +74,8 @@ for line in in_file:
         continue
     links_set = set(links)
     links = list(links_set)
-    links = [line] + links
+    num_links = list(map(lambda x : lines_dic[x] , links))
+    links = [lines_dic[line]] + num_links
     links = " ".join(links)
     # print(line)
     out_file.write(links+"\n")
