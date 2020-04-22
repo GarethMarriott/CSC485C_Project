@@ -1,0 +1,35 @@
+bfs_loop_unrolling_list 1 114 103
+1000:
+BFS run time : 3.95431
+BFS + preprocessing run time : 4.01467
+2000:
+BFS run time : 15.7676
+BFS + preprocessing run time : 15.9709
+3000:
+BFS run time : 36.7599
+BFS + preprocessing run time : 37.2095
+4000:
+BFS run time : 64.5846
+BFS + preprocessing run time : 65.3296
+5000:
+BFS run time : 100.992
+BFS + preprocessing run time : 102.117
+6000:
+BFS run time : 145.016
+BFS + preprocessing run time : 146.63
+7000:
+BFS run time : 197.803
+BFS + preprocessing run time : 199.988
+8000:
+BFS run time : 255.656
+BFS + preprocessing run time : 258.447
+9000:
+BFS run time : 330.05
+BFS + preprocessing run time : 333.576
+10000:
+BFS run time : 406.841
+BFS + preprocessing run time : 411.185
+20000:
+BFS run time : 1640.72
+BFS + preprocessing run time : 1657.61
+
