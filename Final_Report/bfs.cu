@@ -116,9 +116,9 @@ void process_row( int *dev_adjacency_list , bool *dev_discovered , int *dev_path
 
     while(head != tail)
     {
-        if (head >= n || tail >= n) {
-          printf("ERROR\n");
-        }
+        // if (head >= n || tail >= n) {
+        //   printf("ERROR\n");
+        // }
         curr = queue[head++];
 
         dev_path[idx*n + curr.value] = curr.parent;
