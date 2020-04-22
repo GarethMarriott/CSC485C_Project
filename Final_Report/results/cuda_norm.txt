@@ -1,47 +1,4 @@
 1000:
-BFS run time : 0.704641
-BFS + preprocessing run time : 0.730246
-2000:
-BFS run time : 1.47077
-BFS + preprocessing run time : 1.53865
-3000:
-BFS run time : 2.64345
-BFS + preprocessing run time : 2.77313
-4000:
-BFS run time : 3.5766
-BFS + preprocessing run time : 3.78287
-5000:
-BFS run time : 4.39857
-BFS + preprocessing run time : 4.69483
-6000:
-BFS run time : 5.38217
-BFS + preprocessing run time : 5.78746
-7000:
-BFS run time : 6.51473
-BFS + preprocessing run time : 7.0461
-8000:
-BFS run time : 7.75561
-BFS + preprocessing run time : 8.42077
-9000:
-BFS run time : 9.27184
-BFS + preprocessing run time : 10.1133
-10000:
-BFS run time : 10.8388
-BFS + preprocessing run time : 11.8276
-20000:
-BFS run time : 35.4648
-BFS + preprocessing run time : 39.1416
-30000:
-BFS run time : 51.9235
-BFS + preprocessing run time : 59.7677
-40000:
-BFS run time : 90.5625
-BFS + preprocessing run time : 104.518
-
-
-
-
-1000:
 BFS run time : 1.68343
 BFS + preprocessing run time : 1.71045
 2000:
@@ -83,16 +40,61 @@ BFS + preprocessing run time : 104.143
 50000:
 BFS run time : 138.778
 BFS + preprocessing run time : 159.867
-munmap_chunk(): invalid pointer
-Aborted (core dumped)
 60000:
 BFS run time : 194.913
 BFS + preprocessing run time : 225.238
-munmap_chunk(): invalid pointer
-Aborted (core dumped)
+
+
+1000:
+BFS run time : 1.71198
+BFS + preprocessing run time : 1.73832
+2000:
+BFS run time : 2.11432
+BFS + preprocessing run time : 2.18332
+3000:
+BFS run time : 2.86651
+BFS + preprocessing run time : 2.99921
+4000:
+BFS run time : 3.61522
+BFS + preprocessing run time : 3.82343
+5000:
+BFS run time : 4.4203
+BFS + preprocessing run time : 4.72527
+6000:
+BFS run time : 5.41572
+BFS + preprocessing run time : 5.83504
+7000:
+BFS run time : 6.52475
+BFS + preprocessing run time : 7.07651
+8000:
+BFS run time : 9.71325
+BFS + preprocessing run time : 10.396
+9000:
+BFS run time : 11.6961
+BFS + preprocessing run time : 12.5512
+10000:
+BFS run time : 13.8986
+BFS + preprocessing run time : 14.9196
+20000:
+BFS run time : 37.9234
+BFS + preprocessing run time : 41.6639
+30000:
+BFS run time : 51.5909
+BFS + preprocessing run time : 59.6586
+40000:
+BFS run time : 89.1122
+BFS + preprocessing run time : 102.918
+50000:
+BFS run time : 138.685
+BFS + preprocessing run time : 160.071
+60000:
+BFS run time : 194.216
+BFS + preprocessing run time : 224.819
 70000:
-BFS run time : 264.987
-BFS + preprocessing run time : 306.639
-munmap_chunk(): invalid pointer
-Aborted (core dumped)
+BFS run time : 265.29
+BFS + preprocessing run time : 307.431
+80000:
+BFS run time : 352.43
+BFS + preprocessing run time : 406.586
+
 
