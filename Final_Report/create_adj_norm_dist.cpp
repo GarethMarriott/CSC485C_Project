@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
 
 	for (int i = 0; i < size; i++) {
 		int number = 0;
-		while (number < 1) {
+		while (number < 1 && number < size-1) {
 			number = std::round(distribution(gen));
 			numOfEdges.push_back(number);
 			// printf("%d\n", number);
