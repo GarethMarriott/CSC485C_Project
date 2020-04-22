@@ -44,10 +44,6 @@ echo 10000-100:
 ./create_matrix 10000 100 1 > 10000-100matrix.txt
 ./$1 10000-100matrix.txt $2
 rm -r 10000-100matrix.txt
-echo 20000-100:
-./create_matrix 20000 100 1 > 20000-100matrix.txt
-./$1 20000-100matrix.txt $2
-rm -r 20000-100matrix.txt
 echo '---sparceness 100 done---'
 echo 1000-1000:
 ./create_matrix 1000 1000 1 > 1000-1000matrix.txt
