@@ -1,0 +1,56 @@
+bfs_loop_unrolling_txt 1
+1000-100:
+BFS run time : 0.460517
+BFS + preprocessing run time : 0.648825
+2000-100:
+BFS run time : 2.98435
+BFS + preprocessing run time : 3.70371
+3000-100:
+BFS run time : 9.25932
+BFS + preprocessing run time : 10.8813
+4000-100:
+BFS run time : 21.0476
+BFS + preprocessing run time : 23.8952
+5000-100:
+BFS run time : 40.2238
+BFS + preprocessing run time : 44.6727
+6000-100:
+BFS run time : 67.6205
+BFS + preprocessing run time : 74.0425
+7000-100:
+BFS run time : 105.525
+BFS + preprocessing run time : 114.208
+8000-100:
+BFS run time : 155.448
+BFS + preprocessing run time : 166.778
+9000-100:
+BFS run time : 220.012
+BFS + preprocessing run time : 234.424
+---sparceness 100 done---
+5000-1000:
+BFS run time : 8.21745
+BFS + preprocessing run time : 12.6551
+6000-1000:
+BFS run time : 13.047
+BFS + preprocessing run time : 19.4661
+7000-1000:
+BFS run time : 19.4552
+BFS + preprocessing run time : 28.1039
+8000-1000:
+BFS run time : 27.5445
+BFS + preprocessing run time : 38.9881
+9000-1000:
+BFS run time : 36.6674
+BFS + preprocessing run time : 50.9779
+10000-1000:
+BFS run time : 48.1366
+BFS + preprocessing run time : 65.7676
+20000-1000:
+BFS run time : 310.253
+BFS + preprocessing run time : 380.55
+30000-1000:
+BFS run time : 947.625
+BFS + preprocessing run time : 1105.16
+40000-1000:
+BFS run time : 2174.4
+BFS + preprocessing run time : 2456.56
