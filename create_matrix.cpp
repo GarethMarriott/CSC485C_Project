@@ -4,8 +4,6 @@
 #include <iostream>
 #include <sstream>      // std::stringstream, std::stringbuf
 #include <vector>
-#include <string>
-#include <random>
 
 //USAGE: ./createMatrix <width/height of matrix> <sparceness factor>
 
@@ -25,7 +23,7 @@ int main(int argc, char const *argv[]) {
 	s << argv[1];
 	size_t count;
 	s >> count;
-	// std::cout << count << std::endl;
+	std::cout << count << std::endl;
 
 	s.clear();
 	s << argv[3];
@@ -39,51 +37,36 @@ int main(int argc, char const *argv[]) {
 		matrix[i].resize(count);
 	}
 
-
-	std::string adjacency_list = "std::vector< std::vector<int> > adj_pre = {";
-
 	srand (time(NULL));
 
-	bool firsti = true;
 	for (size_t i = 0; i < count; i++) {
-		if (firsti) {
-			adjacency_list.append("{");
-			firsti = false;
-		}else{
-			adjacency_list.append(",{");
-		}
-
-		bool firstj = true;
 		for (size_t j = 0; j < count; j++) {
-
-
-
-			if (rand() % max_rand + 1 <= 1 && j!=i) {
-
-				if (firstj) {
-					adjacency_list.append(std::to_string(j));
-					firstj = false;
+			if (i == j) {
+				matrix[i][j] = 0;
+			}else{
+				if (rand() % max_rand + 1 <= 1) {
+					matrix[i][j] = 1;
 				}else{
-					adjacency_list.append("," + std::to_string(j));
+					if (mode == 1) {
+						matrix[i][j] = -1;
+					}else{
+						matrix[i][j] = 2;
+					}
 				}
-
 			}
 		}
-		adjacency_list.append("}");
 	}
-	adjacency_list.append("};");
 
-	// int percentCount = 0;
-	// for (size_t i = 0; i < count; i++) {
-	// 	for (size_t j = 0; j < count; j++) {
-	// 		printf("%d ", matrix[i][j]);
-	// 		if (matrix[i][j] == 1) {
-	// 			percentCount++;
-	// 		}
-	// 	}
-	// 	printf("\n");
- 	std::cout << adjacency_list << std::endl;
-
+	int percentCount = 0;
+	for (size_t i = 0; i < count; i++) {
+		for (size_t j = 0; j < count; j++) {
+			printf("%d ", matrix[i][j]);
+			if (matrix[i][j] == 1) {
+				percentCount++;
+			}
+		}
+		printf("\n");
+	}
 
 	// printf("%d\n", percentCount);
 	// float percent = ((float)percentCount)/((float)((count*count)-count));
@@ -91,32 +74,3 @@ int main(int argc, char const *argv[]) {
 	// printf("percent of edges: %f\n", percent);
 	return 0;
 }
-
-// #include <iostream>
-// #include <string>
-// #include <random>
-//
-// int main()
-// {
-//   const int nrolls=10000;  // number of experiments
-//   const int nstars=100;    // maximum number of stars to distribute
-//
-//   std::default_random_engine generator;
-//   std::normal_distribution<double> distribution(5.0,2.0);
-//
-//   int p[10]={};
-//
-//   for (int i=0; i<nrolls; ++i) {
-//     double number = distribution(generator);
-//     if ((number>=0.0)&&(number<10.0)) ++p[int(number)];
-//   }
-//
-//   std::cout << "normal_distribution (5.0,2.0):" << std::endl;
-//
-//   for (int i=0; i<10; ++i) {
-//     std::cout << i << "-" << (i+1) << ": ";
-//     std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-//   }
-//
-//   return 0;
-// }
