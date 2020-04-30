@@ -50,16 +50,15 @@ int main(int argc, char const *argv[]) {
 	std::list<int> numOfEdges;
 
 	for (int i = 0; i < size; i++) {
-		int number = 0;
-		while (number < 1 || number > size-2) {
+		int number_of_edges = 0;
+		// continue to generate
+		while (number_of_edges < 1 || number_of_edges > size-2) {
 			number = std::round(distribution(gen));
-			// printf("%d\n", number);
 		}
-		numOfEdges.push_back(number);
 
 		std::list<int> adjacent_numbers;
 
-		for (int j = 0; j < number; j++) {
+		for (int j = 0; j < number_of_edges; j++) {
 			int edgeTo = rand() % size;
 			bool found = (std::find(adjacent_numbers.begin(), adjacent_numbers.end(), edgeTo) != adjacent_numbers.end());
 			if (found && edgeTo > 0 && edgeTo != i) {
