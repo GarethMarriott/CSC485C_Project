@@ -14,7 +14,7 @@
 
 int main(int argc, char const *argv[]) {
 	if (argc != 4){
-		std::cout << "INVALID ARGS - USAGE: ./create_matrix <width/height of matrix> <sparceness factor> <1 or 2 ( 1=baseline 2=current )>" << std::endl;
+		std::cout << "INVALID ARGS - USAGE: ./createMatrix <width/height of matrix> <mean> <SD>" << std::endl;
 		return 0;
 	}
 	srand (time(NULL));
@@ -48,33 +48,32 @@ int main(int argc, char const *argv[]) {
 	std::normal_distribution<double> distribution(mean,deviation);
 
 	std::list<int> numOfEdges;
-
 	for (int i = 0; i < size; i++) {
 		int number_of_edges = 0;
-		// continue to generate
-		while (number_of_edges < 1 || number_of_edges > size-2) {
-			number = std::round(distribution(gen));
-		}
+
+		number_of_edges = std::round(distribution(gen));
+
+		if (number_of_edges < 1) { number_of_edges = 1; }
+
+		if (number_of_edges > size-1) { number_of_edges = size-1;	}
 
 		std::list<int> adjacent_numbers;
 
 		for (int j = 0; j < number_of_edges; j++) {
 			int edgeTo = rand() % size;
 			bool found = (std::find(adjacent_numbers.begin(), adjacent_numbers.end(), edgeTo) != adjacent_numbers.end());
-			if (found && edgeTo > 0 && edgeTo != i) {
+			if (found || edgeTo == i ) {
 				j--;
 			}else{
 				adjacent_numbers.push_back(edgeTo);
 			}
 		}
 
+		// std::cout << adjacent_numbers.size() << std::endl;
 		adjacent_numbers.unique();
 		adjacent_numbers.sort();
 
-		// for (size_t num = 0; num < adjacent_numbers.size(); num++) {
-		// 	printf("%d ", adjacent_numbers[num]);
-		// }
-		// printf("\n");
+
 		for (auto it=adjacent_numbers.begin(); it!=adjacent_numbers.end(); ++it){
     	std::cout << *it << ' ';
 		}
